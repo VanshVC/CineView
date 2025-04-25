@@ -274,7 +274,7 @@
 
 .trending-slider {
     position: relative;
-    padding: 0 5%;
+    padding: 0;
     margin-bottom: 3rem;
     overflow: hidden;
 }
