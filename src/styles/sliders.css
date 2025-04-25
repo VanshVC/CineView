@@ -1,0 +1,587 @@
+/* Slider Styles for CineView */
+
+/* Common Slider Styles */
+.movies-slider {
+    position: relative;
+    margin: 2rem 0;
+}
+
+.movie-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+    background: rgba(20, 20, 30, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.movie-poster {
+    position: relative;
+    height: 380px;
+    overflow: hidden;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.movie-card:hover .movie-poster img {
+    transform: scale(1.05);
+}
+
+.movie-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(45deg, var(--secondary-color), var(--tertiary-color));
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.movie-details {
+    padding: 1.2rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    color: white;
+    transform: translateY(70px);
+    transition: transform 0.3s ease;
+}
+
+.movie-card:hover .movie-details {
+    transform: translateY(0);
+}
+
+.movie-details h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.movie-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.watch-btn, .add-list-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.watch-btn {
+    background: linear-gradient(45deg, var(--secondary-color), var(--tertiary-color));
+    color: white;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.add-list-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.watch-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 42, 109, 0.4);
+}
+
+.add-list-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Style 1: Carousel Style with Arrows */
+.carousel-style {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding: 1.5rem 0.5rem;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.carousel-style::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.carousel-style .movie-card {
+    flex: 0 0 280px;
+    width: 280px;
+}
+
+.slider-controls {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 30;
+    pointer-events: none;
+    padding: 0;
+    width: 100%;
+}
+
+.slider-arrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    opacity: 0.9;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+    font-size: 1rem;
+}
+
+.slider-arrow.prev-arrow {
+    left: 10px;
+}
+
+.slider-arrow.next-arrow {
+    right: 10px;
+}
+
+.slider-arrow:hover {
+    background: linear-gradient(45deg, var(--secondary-color), var(--tertiary-color));
+    transform: translateY(-50%) scale(1.1);
+    opacity: 1;
+}
+
+/* Make sure arrows are visible on mobile */
+@media (max-width: 768px) {
+    .slider-arrow {
+        width: 36px;
+        height: 36px;
+        opacity: 1;
+    }
+    
+    .slider-arrow.prev-arrow {
+        left: 5px;
+    }
+    
+    .slider-arrow.next-arrow {
+        right: 5px;
+    }
+    
+    .slider-controls {
+        display: flex !important;
+    }
+}
+
+/* Fix for slider controls in sections */
+section {
+    position: relative;
+}
+
+.trending, .tv-shows {
+    position: relative;
+    padding: 0 20px;
+}
+
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.trending .movies-slider, .tv-shows .movies-slider {
+    position: relative;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.slider-wrapper .slider-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 40;
+}
+
+/* Style 2: Snap Scroll with Pagination */
+.snap-scroll-style {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding: 1.5rem 0.5rem;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+.snap-scroll-style::-webkit-scrollbar {
+    display: none;
+}
+
+.snap-scroll-style .movie-card {
+    flex: 0 0 280px;
+    width: 280px;
+    scroll-snap-align: start;
+}
+
+/* Special positioning for TV Shows slider controls */
+.tv-shows {
+    margin-bottom: 40px;
+}
+
+.tv-shows .slider-controls {
+    z-index: 30;
+    display: flex !important;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+    padding: 0 10px;
+}
+
+.tv-shows .slider-arrow {
+    opacity: 0.9;
+    z-index: 40;
+    display: flex !important;
+    pointer-events: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.slider-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 25;
+}
+
+.pagination-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.pagination-dot:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.pagination-dot.active {
+    background: linear-gradient(45deg, var(--secondary-color), var(--tertiary-color));
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(255, 42, 109, 0.5);
+}
+
+/* Style 3: Featured Grid */
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.featured-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 300px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+}
+
+.featured-item.large {
+    grid-row: span 2;
+    height: auto;
+}
+
+.featured-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.featured-item:hover img {
+    transform: scale(1.05);
+}
+
+.featured-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 30%, transparent 70%);
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+    transition: background 0.3s ease;
+}
+
+.featured-item:hover .featured-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 50%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.featured-content {
+    color: white;
+    width: 100%;
+    transform: translateY(30px);
+    opacity: 0.9;
+    transition: all 0.4s ease;
+}
+
+.featured-item:hover .featured-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.featured-badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background: linear-gradient(45deg, var(--secondary-color), var(--tertiary-color));
+    color: white;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.featured-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.featured-content p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.featured-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.featured-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.featured-meta i {
+    color: var(--accent-color);
+}
+
+.featured-actions {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.featured-actions .watch-btn,
+.featured-actions .trailer-btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.featured-actions .watch-btn {
+    background: linear-gradient(45deg, var(--secondary-color), var(--tertiary-color));
+    color: white;
+}
+
+.featured-actions .trailer-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.featured-actions .watch-btn:hover,
+.featured-actions .trailer-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.featured-actions .trailer-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .featured-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .featured-item.large {
+        grid-row: auto;
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-style .movie-card,
+    .snap-scroll-style .movie-card {
+        flex: 0 0 220px;
+        width: 220px;
+    }
+    
+    .movie-poster {
+        height: 320px;
+    }
+    
+    .featured-content h3 {
+        font-size: 1.2rem;
+    }
+    
+    .featured-content p {
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+    }
+    
+    .slider-controls {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-style .movie-card,
+    .snap-scroll-style .movie-card {
+        flex: 0 0 180px;
+        width: 180px;
+    }
+    
+    .movie-poster {
+        height: 260px;
+    }
+    
+    .featured-item {
+        height: 250px;
+    }
+    
+    .featured-content p {
+        display: none;
+    }
+    
+    .featured-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* Animation for slider items */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.movie-card, .featured-item {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.movie-card:nth-child(2), .featured-item:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.movie-card:nth-child(3), .featured-item:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.movie-card:nth-child(4), .featured-item:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.movie-card:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.movie-card:nth-child(6) {
+    animation-delay: 0.5s;
+}

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMDB API Debug - CineView</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #f5c518;
+            margin-bottom: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .debug-section {
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .debug-title {
+            color: #f5c518;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: white;
+            font-size: 1rem;
+        }
+        
+        button {
+            background-color: #f5c518;
+            color: black;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        button:hover {
+            background-color: #e0b30b;
+        }
+        
+        .result-container {
+            margin-top: 20px;
+            background-color: #333;
+            border-radius: 4px;
+            padding: 15px;
+            overflow: auto;
+            max-height: 400px;
+        }
+        
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        
+        .success {
+            color: #4caf50;
+        }
+        
+        .error {
+            color: #f44336;
+        }
+        
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: #f5c518;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .api-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .api-info-item {
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            flex: 1;
+            margin-right: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .api-info-item:last-child {
+            margin-right: 0;
+        }
+        
+        .api-info-title {
+            color: #f5c518;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .api-info-value {
+            font-family: monospace;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OMDB API Debug Tool</h1>
+        
+        <div class="api-info">
+            <div class="api-info-item">
+                <h3 class="api-info-title">API Key</h3>
+                <div class="api-info-value" id="apiKey">Loading...</div>
+            </div>
+            <div class="api-info-item">
+                <h3 class="api-info-title">API Base URL</h3>
+                <div class="api-info-value" id="apiBaseUrl">Loading...</div>
+            </div>
+            <div class="api-info-item">
+                <h3 class="api-info-title">Status</h3>
+                <div class="api-info-value" id="apiStatus">Checking...</div>
+            </div>
+        </div>
+        
+        <div class="debug-section">
+            <h2 class="debug-title">Search by Title</h2>
+            <div class="form-group">
+                <label for="movieTitle">Movie Title:</label>
+                <input type="text" id="movieTitle" placeholder="e.g., The Matrix">
+            </div>
+            <div class="form-group">
+                <label for="movieYear">Year (optional):</label>
+                <input type="text" id="movieYear" placeholder="e.g., 1999">
+            </div>
+            <button id="searchTitleBtn">Search</button>
+            <div class="result-container" id="titleResult">
+                <pre>Results will appear here...</pre>
+            </div>
+        </div>
+        
+        <div class="debug-section">
+            <h2 class="debug-title">Search by IMDb ID</h2>
+            <div class="form-group">
+                <label for="imdbId">IMDb ID:</label>
+                <input type="text" id="imdbId" placeholder="e.g., tt0133093">
+            </div>
+            <button id="searchIdBtn">Search</button>
+            <div class="result-container" id="idResult">
+                <pre>Results will appear here...</pre>
+            </div>
+        </div>
+        
+        <div class="debug-section">
+            <h2 class="debug-title">General Search</h2>
+            <div class="form-group">
+                <label for="searchQuery">Search Query:</label>
+                <input type="text" id="searchQuery" placeholder="e.g., Star Wars">
+            </div>
+            <button id="searchBtn">Search Movies</button>
+            <button id="searchTvBtn">Search TV Shows</button>
+            <div class="result-container" id="searchResult">
+                <pre>Results will appear here...</pre>
+            </div>
+        </div>
+        
+        <div class="debug-section">
+            <h2 class="debug-title">Direct API Request</h2>
+            <div class="form-group">
+                <label for="apiParams">API Parameters (after apikey):</label>
+                <input type="text" id="apiParams" placeholder="e.g., &t=The Matrix&y=1999">
+            </div>
+            <button id="directRequestBtn">Make Request</button>
+            <div class="result-container" id="directResult">
+                <pre>Results will appear here...</pre>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module">
+        import { 
+            getMovieDetailsByTitle, 
+            getMovieDetailsByImdbId, 
+            searchOMDB,
+            OMDB_API_KEY,
+            OMDB_BASE_URL
+        } from './src/js/api.js';
+        
+        // Display API configuration
+        document.getElementById('apiKey').textContent = OMDB_API_KEY;
+        document.getElementById('apiBaseUrl').textContent = OMDB_BASE_URL;
+        
+        // Check API status
+        async function checkApiStatus() {
+            try {
+                const result = await getMovieDetailsByTitle('The Matrix');
+                if (result && result.Response === 'True') {
+                    document.getElementById('apiStatus').textContent = 'Connected';
+                    document.getElementById('apiStatus').className = 'api-info-value success';
+                } else {
+                    document.getElementById('apiStatus').textContent = 'Error: ' + (result.Error || 'Unknown error');
+                    document.getElementById('apiStatus').className = 'api-info-value error';
+                }
+            } catch (error) {
+                document.getElementById('apiStatus').textContent = 'Error: ' + error.message;
+                document.getElementById('apiStatus').className = 'api-info-value error';
+            }
+        }
+        
+        checkApiStatus();
+        
+        // Search by title
+        document.getElementById('searchTitleBtn').addEventListener('click', async () => {
+            const title = document.getElementById('movieTitle').value.trim();
+            const year = document.getElementById('movieYear').value.trim();
+            
+            if (!title) {
+                alert('Please enter a movie title');
+                return;
+            }
+            
+            const resultContainer = document.getElementById('titleResult');
+            resultContainer.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+            
+            try {
+                const result = await getMovieDetailsByTitle(title, year || null);
+                resultContainer.innerHTML = '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
+            } catch (error) {
+                resultContainer.innerHTML = '<pre class="error">Error: ' + error.message + '</pre>';
+            }
+        });
+        
+        // Search by IMDb ID
+        document.getElementById('searchIdBtn').addEventListener('click', async () => {
+            const imdbId = document.getElementById('imdbId').value.trim();
+            
+            if (!imdbId) {
+                alert('Please enter an IMDb ID');
+                return;
+            }
+            
+            const resultContainer = document.getElementById('idResult');
+            resultContainer.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+            
+            try {
+                const result = await getMovieDetailsByImdbId(imdbId);
+                resultContainer.innerHTML = '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
+            } catch (error) {
+                resultContainer.innerHTML = '<pre class="error">Error: ' + error.message + '</pre>';
+            }
+        });
+        
+        // General search for movies
+        document.getElementById('searchBtn').addEventListener('click', async () => {
+            const query = document.getElementById('searchQuery').value.trim();
+            
+            if (!query) {
+                alert('Please enter a search query');
+                return;
+            }
+            
+            const resultContainer = document.getElementById('searchResult');
+            resultContainer.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+            
+            try {
+                const result = await searchOMDB(query, 'movie');
+                resultContainer.innerHTML = '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
+            } catch (error) {
+                resultContainer.innerHTML = '<pre class="error">Error: ' + error.message + '</pre>';
+            }
+        });
+        
+        // General search for TV shows
+        document.getElementById('searchTvBtn').addEventListener('click', async () => {
+            const query = document.getElementById('searchQuery').value.trim();
+            
+            if (!query) {
+                alert('Please enter a search query');
+                return;
+            }
+            
+            const resultContainer = document.getElementById('searchResult');
+            resultContainer.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+            
+            try {
+                const result = await searchOMDB(query, 'series');
+                resultContainer.innerHTML = '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
+            } catch (error) {
+                resultContainer.innerHTML = '<pre class="error">Error: ' + error.message + '</pre>';
+            }
+        });
+        
+        // Direct API request
+        document.getElementById('directRequestBtn').addEventListener('click', async () => {
+            const params = document.getElementById('apiParams').value.trim();
+            
+            if (!params) {
+                alert('Please enter API parameters');
+                return;
+            }
+            
+            const resultContainer = document.getElementById('directResult');
+            resultContainer.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+            
+            try {
+                const url = `${OMDB_BASE_URL}?apikey=${OMDB_API_KEY}${params}`;
+                const response = await fetch(url);
+                const result = await response.json();
+                resultContainer.innerHTML = '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
+            } catch (error) {
+                resultContainer.innerHTML = '<pre class="error">Error: ' + error.message + '</pre>';
+            }
+        });
+    </script>
+</body>
+</html>

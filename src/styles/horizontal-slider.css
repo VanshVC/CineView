@@ -1,0 +1,311 @@
+/* Horizontal Slider Styles for Movies Page */
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    margin: 40px 0;
+    overflow: hidden;
+}
+
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.horizontal-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 20px 10px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scroll-snap-type: x mandatory;
+}
+
+.horizontal-slider::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+/* Card Styles */
+.slider-card {
+    flex: 0 0 250px;
+    scroll-snap-align: start;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    transform-origin: center bottom;
+}
+
+.slider-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+}
+
+.slider-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slider-poster {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+}
+
+.slider-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.slider-card:hover .slider-poster img {
+    transform: scale(1.05);
+}
+
+.slider-rating {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffcc00;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 5;
+}
+
+.slider-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 60%);
+    opacity: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.slider-card:hover .slider-overlay {
+    opacity: 1;
+}
+
+.slider-buttons {
+    display: flex;
+    gap: 10px;
+    width: 90%;
+}
+
+.slider-buttons button {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider-buttons .watch-btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.slider-buttons .info-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.slider-buttons button i {
+    margin-right: 5px;
+}
+
+.slider-buttons .watch-btn:hover {
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 42, 109, 0.4);
+}
+
+.slider-buttons .info-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.slider-details {
+    padding: 15px;
+}
+
+.slider-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.slider-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #aaa;
+}
+
+/* Controls */
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.slider-prev,
+.slider-next {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    pointer-events: auto;
+}
+
+.slider-prev:hover,
+.slider-next:hover {
+    background: rgba(255, 42, 109, 0.8);
+    transform: scale(1.1);
+    box-shadow: 0 5px 20px rgba(255, 42, 109, 0.5);
+}
+
+/* Pagination */
+.slider-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.slider-dot:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.slider-dot.active {
+    background: linear-gradient(45deg, var(--secondary-color), var(--tertiary-color));
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(255, 42, 109, 0.5);
+}
+
+/* Animation for card entrance */
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slider-card {
+    animation: cardEntrance 0.8s ease forwards;
+    animation-delay: calc(var(--index) * 0.1s);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .slider-card {
+        flex: 0 0 200px;
+    }
+    
+    .slider-poster {
+        height: 280px;
+    }
+    
+    .slider-details h3 {
+        font-size: 16px;
+    }
+    
+    .slider-meta {
+        font-size: 12px;
+    }
+    
+    .slider-buttons button {
+        font-size: 12px;
+        padding: 8px 0;
+    }
+    
+    .slider-prev,
+    .slider-next {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slider-card {
+        flex: 0 0 180px;
+    }
+    
+    .slider-poster {
+        height: 250px;
+    }
+    
+    .slider-controls {
+        padding: 0 10px;
+    }
+    
+    .slider-prev,
+    .slider-next {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+}

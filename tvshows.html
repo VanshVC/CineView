@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Shows - CineView</title>
+    <link rel="stylesheet" href="src/styles/theme-reset.css">
+    <link rel="stylesheet" href="src/styles/theme.css">
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/modal.css">
+    <link rel="stylesheet" href="src/styles/tvshows.css">
+    <link rel="stylesheet" href="src/styles/auth.css">
+    <link rel="stylesheet" href="src/styles/omdb-integration.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>CineView</h1>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="tvshows.html" class="active">TV Shows</a></li>
+                    <li><a href="mylist.html">My List</a></li>
+                    <li><a href="search.html">Search</a></li>
+                </ul>
+            </div>
+            <div class="nav-buttons">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+                <button class="login-btn" id="loginBtn">Log In</button>
+                <button class="signup-btn" id="signupBtn">Sign Up</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Search Container -->
+    <div class="search-container" id="searchContainer">
+        <form class="search-form">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search for movies, TV shows...">
+            <button type="submit" class="search-submit"><i class="fas fa-search"></i></button>
+        </form>
+        <div class="search-results" id="searchResults">
+            <!-- Search results will be populated here -->
+        </div>
+    </div>
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero-section">
+        <div class="hero-video-container">
+            <video autoplay muted loop id="heroVideo">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-bright-cinematic-intro-sequence-with-red-light-3351-large.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-badge">Premium TV Experience</span>
+            <h1>Unlimited TV Shows & Series</h1>
+            <p>Discover award-winning series, binge-worthy dramas, and exclusive TV shows you won't find anywhere else.</p>
+            <div class="hero-buttons">
+                <button class="hero-btn primary-hero-btn"><i class="fas fa-play"></i> Start Watching</button>
+                <button class="hero-btn secondary-hero-btn"><i class="fas fa-info-circle"></i> Browse Collections</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Now Section with Enhanced Carousel -->
+    <section class="trending-now">
+        <div class="trending-title">
+            <h2>Trending Now</h2>
+            <div class="trending-controls">
+                <button class="trending-control trending-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="trending-control trending-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="trending-slider">
+            <div class="trending-slides" id="trendingSlides">
+                <div class="trending-slide">
+                    <div class="movie-card" data-genre="drama">
+                        <div class="movie-poster">
+                            <img src="https://image.tmdb.org/t/p/w500/sWghoQfLZuaYY5PvxJbFpuAvnxH.jpg" alt="The Last of Us">
+                            <div class="movie-details">
+                                <h3>The Last of Us</h3>
+                                <div class="movie-meta">
+                                    <span class="movie-rating"><i class="fas fa-star"></i> 9.2</span>
+                                    <span class="movie-year">2023</span>
+                                </div>
+                                <p class="movie-desc">A post-apocalyptic journey of survival and hope.</p>
+                                <button class="watch-btn" data-video="https://www.youtube.com/embed/uLtkt8BonwM" data-title="The Last of Us"><i class="fas fa-play"></i> Watch Now</button>
+                                <button class="add-to-list-btn" data-id="201" data-type="tvshow" data-title="The Last of Us" data-poster="https://image.tmdb.org/t/p/w500/sWghoQfLZuaYY5PvxJbFpuAvnxH.jpg"><i class="fas fa-plus"></i> Add to List</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trending-slide">
+                    <div class="movie-card" data-genre="sci-fi">
+                        <div class="movie-poster">
+                            <img src="https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg" alt="The Mandalorian">
+                            <div class="movie-details">
+                                <h3>The Mandalorian</h3>
+                                <div class="movie-meta">
+                                    <span class="movie-rating"><i class="fas fa-star"></i> 8.8</span>
+                                    <span class="movie-year">2023</span>
+                                </div>
+                                <p class="movie-desc">A lone bounty hunter's journey through the outer reaches of the galaxy.</p>
+                                <button class="watch-btn" data-video="https://www.youtube.com/embed/aOC8E8z_ifw" data-title="The Mandalorian"><i class="fas fa-play"></i> Watch Now</button>
+                                <button class="add-to-list-btn" data-id="202" data-type="tvshow" data-title="The Mandalorian" data-poster="https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg"><i class="fas fa-plus"></i> Add to List</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trending-slide">
+                    <div class="movie-card" data-genre="drama">
+                        <div class="movie-poster">
+                            <img src="https://image.tmdb.org/t/p/w500/wXCOELIgsRrHa3nMY69tN6XrEv6.jpg" alt="The Crown">
+                            <div class="movie-details">
+                                <h3>The Crown</h3>
+                                <div class="movie-meta">
+                                    <span class="movie-rating"><i class="fas fa-star"></i> 8.7</span>
+                                    <span class="movie-year">2023</span>
+                                </div>
+                                <p class="movie-desc">The reign of Queen Elizabeth II and the events that shaped the second half of the 20th century.</p>
+                                <button class="watch-btn" data-video="https://www.youtube.com/embed/JWtnJjn6ng0" data-title="The Crown"><i class="fas fa-play"></i> Watch Now</button>
+                                <button class="add-to-list-btn" data-id="203" data-type="tvshow" data-title="The Crown" data-poster="https://image.tmdb.org/t/p/w500/wXCOELIgsRrHa3nMY69tN6XrEv6.jpg"><i class="fas fa-plus"></i> Add to List</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trending-slide">
+                    <div class="movie-card" data-genre="sci-fi">
+                        <div class="movie-poster">
+                            <img src="https://image.tmdb.org/t/p/w500/mY7SeH4HFFxW1hiI6cWuwLOqVvj.jpg" alt="Stranger Things">
+                            <div class="movie-details">
+                                <h3>Stranger Things</h3>
+                                <div class="movie-meta">
+                                    <span class="movie-rating"><i class="fas fa-star"></i> 8.7</span>
+                                    <span class="movie-year">2023</span>
+                                </div>
+                                <p class="movie-desc">When a young boy disappears, his mother and friends must confront terrifying supernatural forces.</p>
+                                <button class="watch-btn" data-video="https://www.youtube.com/embed/b9EkMc79ZSU" data-title="Stranger Things"><i class="fas fa-play"></i> Watch Now</button>
+                                <button class="add-to-list-btn" data-id="204" data-type="tvshow" data-title="Stranger Things" data-poster="https://image.tmdb.org/t/p/w500/mY7SeH4HFFxW1hiI6cWuwLOqVvj.jpg"><i class="fas fa-plus"></i> Add to List</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trending-slide">
+                    <div class="movie-card" data-genre="thriller">
+                        <div class="movie-poster">
+                            <img src="https://image.tmdb.org/t/p/w500/qF2LREwME3VITzO8XJd3lk13p8M.jpg" alt="Money Heist">
+                            <div class="movie-details">
+                                <h3>Money Heist</h3>
+                                <div class="movie-meta">
+                                    <span class="movie-rating"><i class="fas fa-star"></i> 8.3</span>
+                                    <span class="movie-year">2023</span>
+                                </div>
+                                <p class="movie-desc">A criminal mastermind recruits eight people to carry out an ambitious plan.</p>
+                                <button class="watch-btn" data-video="https://www.youtube.com/embed/hMANIarjT50" data-title="Money Heist"><i class="fas fa-play"></i> Watch Now</button>
+                                <button class="add-to-list-btn" data-id="205" data-type="tvshow" data-title="Money Heist" data-poster="https://image.tmdb.org/t/p/w500/qF2LREwME3VITzO8XJd3lk13p8M.jpg"><i class="fas fa-plus"></i> Add to List</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trending-slide">
+                    <div class="movie-card" data-genre="thriller">
+                        <div class="movie-poster">
+                            <img src="https://image.tmdb.org/t/p/w500/V0XOApF5nLU.jpg" alt="Black Mirror">
+                            <div class="movie-details">
+                                <h3>Black Mirror</h3>
+                                <div class="movie-meta">
+                                    <span class="movie-rating"><i class="fas fa-star"></i> 8.8</span>
+                                    <span class="movie-year">2023</span>
+                                </div>
+                                <p class="movie-desc">An anthology series exploring technology's dark side.</p>
+                                <button class="watch-btn" data-video="https://www.youtube.com/embed/V0XOApF5nLU" data-title="Black Mirror"><i class="fas fa-play"></i> Watch Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured TV Show Carousel -->
+    <section class="featured-content">
+        <div class="carousel-container">
+            <div class="carousel-nav">
+                <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="carousel-slider">
+                <div class="carousel-slide active">
+                    <div class="featured-backdrop" style="background-image: url('https://image.tmdb.org/t/p/original/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg')">
+                        <div class="featured-content-details">
+                            <span class="featured-badge">Featured Series</span>
+                            <h3>Family Secrets</h3>
+                            <div class="featured-meta">
+                                <span><i class="fas fa-film"></i> Drama</span>
+                                <span><i class="fas fa-star"></i> 9.5</span>
+                                <span><i class="fas fa-clock"></i> 3 Seasons</span>
+                            </div>
+                            <p>A gripping family drama with unexpected twists and emotional revelations that will keep you on the edge of your seat.</p>
+                            <div class="featured-buttons">
+                                <button class="play-btn"><i class="fas fa-play"></i> Play</button>
+                                <button class="info-btn"><i class="fas fa-info-circle"></i> More Info</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="featured-backdrop" style="background-image: url('https://image.tmdb.org/t/p/original/6TB7wj7WpuQznxdvMVnKkUbYVwl.jpg')">
+                        <div class="featured-content-details">
+                            <span class="featured-badge">Top Rated</span>
+                            <h3>Urban Friends</h3>
+                            <div class="featured-meta">
+                                <span><i class="fas fa-film"></i> Comedy</span>
+                                <span><i class="fas fa-star"></i> 8.7</span>
+                                <span><i class="fas fa-clock"></i> 5 Seasons</span>
+                            </div>
+                            <p>A hilarious comedy about a group of friends navigating life, love, and career in the big city.</p>
+                            <div class="featured-buttons">
+                                <button class="play-btn"><i class="fas fa-play"></i> Play</button>
+                                <button class="info-btn"><i class="fas fa-info-circle"></i> More Info</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="featured-backdrop" style="background-image: url('https://image.tmdb.org/t/p/original/49WJfeN0moxb9IPfGn8AIqMGskD.jpg')">
+                        <div class="featured-content-details">
+                            <span class="featured-badge">New Season</span>
+                            <h3>Paranormal Town</h3>
+                            <div class="featured-meta">
+                                <span><i class="fas fa-film"></i> Sci-Fi</span>
+                                <span><i class="fas fa-star"></i> 9.2</span>
+                                <span><i class="fas fa-clock"></i> 4 Seasons</span>
+                            </div>
+                            <p>Supernatural events begin to unfold in a small town, changing the lives of its residents forever in this thrilling sci-fi adventure.</p>
+                            <div class="featured-buttons">
+                                <button class="play-btn"><i class="fas fa-play"></i> Play</button>
+                                <button class="info-btn"><i class="fas fa-info-circle"></i> More Info</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <span class="indicator active" data-slide="0"></span>
+                    <span class="indicator" data-slide="1"></span>
+                    <span class="indicator" data-slide="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Genre Filters -->
+    <section class="genre-filters">
+        <h2>Browse by Genre</h2>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="drama">Drama</button>
+            <button class="filter-btn" data-filter="comedy">Comedy</button>
+            <button class="filter-btn" data-filter="sci-fi">Sci-Fi</button>
+            <button class="filter-btn" data-filter="fantasy">Fantasy</button>
+            <button class="filter-btn" data-filter="thriller">Thriller</button>
+            <button class="filter-btn" data-filter="horror">Horror</button>
+        </div>
+    </section>
+
+    <!-- Popular TV Shows -->
+    <section class="trending">
+        <h2>Popular TV Shows</h2>
+        <div class="movies-slider">
+            <div class="movie-card" data-genre="drama">
+                <div class="movie-poster">
+                    <img src="https://image.tmdb.org/t/p/w500/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg" alt="Breaking Bad">
+                    <div class="movie-details">
+                        <h3>Family Secrets</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 9.5</span>
+                            <span class="movie-year">2022-Present</span>
+                        </div>
+                        <p class="movie-desc">A gripping family drama with unexpected twists and emotional revelations.</p>
+                        <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                        <button class="add-to-list-btn" data-id="101" data-type="tvshow" data-title="Family Secrets" data-poster="https://image.tmdb.org/t/p/w500/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg"><i class="fas fa-plus"></i> Add to My List</button>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card" data-genre="comedy">
+                <div class="movie-poster">
+                    <img src="https://image.tmdb.org/t/p/w500/6TB7wj7WpuQznxdvMVnKkUbYVwl.jpg" alt="Friends">
+                    <div class="movie-details">
+                        <h3>Urban Friends</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 8.7</span>
+                            <span class="movie-year">2023-Present</span>
+                        </div>
+                        <p class="movie-desc">A hilarious comedy about a group of friends navigating life in the city.</p>
+                        <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                        <button class="add-to-list-btn" data-id="102" data-type="tvshow" data-title="Urban Friends" data-poster="https://image.tmdb.org/t/p/w500/6TB7wj7WpuQznxdvMVnKkUbYVwl.jpg"><i class="fas fa-plus"></i> Add to My List</button>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card" data-genre="sci-fi">
+                <div class="movie-poster">
+                    <img src="https://image.tmdb.org/t/p/w500/49WJfeN0moxb9IPfGn8AIqMGskD.jpg" alt="Stranger Things">
+                    <div class="movie-details">
+                        <h3>Paranormal Town</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 9.2</span>
+                            <span class="movie-year">2022-Present</span>
+                        </div>
+                        <p class="movie-desc">Supernatural events begin to unfold in a small town, changing the lives of its residents forever.</p>
+                        <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                        <button class="add-to-list-btn" data-id="103" data-type="tvshow" data-title="Paranormal Town" data-poster="https://image.tmdb.org/t/p/w500/49WJfeN0moxb9IPfGn8AIqMGskD.jpg"><i class="fas fa-plus"></i> Add to My List</button>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card" data-genre="fantasy">
+                <div class="movie-poster">
+                    <img src="https://image.tmdb.org/t/p/w500/3xYaxB9IkU9cTWzGJmPMGRW1fLO.jpg" alt="Game of Thrones">
+                    <div class="movie-details">
+                        <h3>Kingdom Wars</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 9.4</span>
+                            <span class="movie-year">2021-Present</span>
+                        </div>
+                        <p class="movie-desc">An epic fantasy series with kingdoms at war, dragons, and political intrigue.</p>
+                        <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                        <button class="add-to-list-btn" data-id="104" data-type="tvshow" data-title="Kingdom Wars" data-poster="https://image.tmdb.org/t/p/w500/3xYaxB9IkU9cTWzGJmPMGRW1fLO.jpg"><i class="fas fa-plus"></i> Add to My List</button>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card" data-genre="thriller">
+                <div class="movie-poster">
+                    <img src="https://image.tmdb.org/t/p/w500/9yKCJTOh9m3Lol2RY3kw99QPH6x.jpg" alt="Mindhunter">
+                    <div class="movie-details">
+                        <h3>Criminal Minds</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 8.9</span>
+                            <span class="movie-year">2023-Present</span>
+                        </div>
+                        <p class="movie-desc">A psychological thriller following detectives who profile criminals and solve complex cases.</p>
+                        <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                        <button class="add-to-list-btn" data-id="105" data-type="tvshow" data-title="Criminal Minds" data-poster="https://image.tmdb.org/t/p/w500/9yKCJTOh9m3Lol2RY3kw99QPH6x.jpg"><i class="fas fa-plus"></i> Add to My List</button>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card" data-genre="drama">
+                <div class="movie-poster">
+                    <img src="https://image.tmdb.org/t/p/w500/2fvAIyVfFHQdhJ7NeixxUZQtNOY.jpg" alt="The Crown">
+                    <div class="movie-details">
+                        <h3>Royal Dynasty</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 8.8</span>
+                            <span class="movie-year">2022-Present</span>
+                        </div>
+                        <p class="movie-desc">A dramatic portrayal of the lives of a royal family across generations.</p>
+                        <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                        <button class="add-to-list-btn" data-id="106" data-type="tvshow" data-title="Royal Dynasty" data-poster="https://image.tmdb.org/t/p/w500/2fvAIyVfFHQdhJ7NeixxUZQtNOY.jpg"><i class="fas fa-plus"></i> Add to My List</button>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card" data-genre="horror">
+                <div class="movie-poster">
+                    <img src="https://image.tmdb.org/t/p/w500/tJFIsYnWwUAmA8NNvHTVTpLOE8o.jpg" alt="American Horror Story">
+                    <div class="movie-details">
+                        <h3>Haunted House</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 8.5</span>
+                            <span class="movie-year">2022-Present</span>
+                        </div>
+                        <p class="movie-desc">A terrifying anthology series exploring different horror themes each season.</p>
+                        <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                        <button class="add-to-list-btn" data-id="107" data-type="tvshow" data-title="Haunted House" data-poster="https://image.tmdb.org/t/p/w500/tJFIsYnWwUAmA8NNvHTVTpLOE8o.jpg"><i class="fas fa-plus"></i> Add to My List</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Card Flip Showcase -->
+    <section class="flip-showcase">
+        <h2>Critically Acclaimed Series</h2>
+        <div class="flip-container">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://image.tmdb.org/t/p/w500/3xYaxB9IkU9cTWzGJmPMGRW1fLO.jpg" alt="Kingdom Wars">
+                        <div class="flip-title">Kingdom Wars</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>Kingdom Wars</h3>
+                        <p class="director">Creator: Elizabeth Morgan</p>
+                        <p class="flip-desc">An epic fantasy series with intricate political schemes and unforgettable characters.</p>
+                        <div class="flip-meta">
+                            <span><i class="fas fa-star"></i> 9.4</span>
+                            <span><i class="fas fa-calendar"></i> 2021</span>
+                        </div>
+                        <button class="flip-watch-btn"><i class="fas fa-play"></i> Watch</button>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://image.tmdb.org/t/p/w500/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg" alt="Family Secrets">
+                        <div class="flip-title">Family Secrets</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>Family Secrets</h3>
+                        <p class="director">Creator: Vincent Anderson</p>
+                        <p class="flip-desc">A mind-bending drama that explores the complex relationships within a powerful family dynasty.</p>
+                        <div class="flip-meta">
+                            <span><i class="fas fa-star"></i> 9.5</span>
+                            <span><i class="fas fa-calendar"></i> 2022</span>
+                        </div>
+                        <button class="flip-watch-btn"><i class="fas fa-play"></i> Watch</button>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://image.tmdb.org/t/p/w500/49WJfeN0moxb9IPfGn8AIqMGskD.jpg" alt="Paranormal Town">
+                        <div class="flip-title">Paranormal Town</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>Paranormal Town</h3>
+                        <p class="director">Creator: Robert Spielberg</p>
+                        <p class="flip-desc">A supernatural thriller that combines nostalgia with cutting-edge storytelling.</p>
+                        <div class="flip-meta">
+                            <span><i class="fas fa-star"></i> 9.2</span>
+                            <span><i class="fas fa-calendar"></i> 2022</span>
+                        </div>
+                        <button class="flip-watch-btn"><i class="fas fa-play"></i> Watch</button>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://image.tmdb.org/t/p/w500/9yKCJTOh9m3Lol2RY3kw99QPH6x.jpg" alt="Criminal Minds">
+                        <div class="flip-title">Criminal Minds</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>Criminal Minds</h3>
+                        <p class="director">Creator: David Fincher</p>
+                        <p class="flip-desc">A psychological thriller about FBI profilers hunting the most disturbing serial killers.</p>
+                        <div class="flip-meta">
+                            <span><i class="fas fa-star"></i> 8.9</span>
+                            <span><i class="fas fa-calendar"></i> 2021</span>
+                        </div>
+                        <button class="flip-watch-btn"><i class="fas fa-play"></i> Watch</button>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://image.tmdb.org/t/p/w500/6TB7wj7WpuQznxdvMVnKkUbYVwl.jpg" alt="Urban Friends">
+                        <div class="flip-title">Urban Friends</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>Urban Friends</h3>
+                        <p class="director">Creator: Michael Schur</p>
+                        <p class="flip-desc">A comedy series that redefines friendship and laughter in a modern urban setting.</p>
+                        <div class="flip-meta">
+                            <span><i class="fas fa-star"></i> 8.7</span>
+                            <span><i class="fas fa-calendar"></i> 2023</span>
+                        </div>
+                        <button class="flip-watch-btn"><i class="fas fa-play"></i> Watch</button>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://image.tmdb.org/t/p/w500/2fvAIyVfFHQdhJ7NeixxUZQtNOY.jpg" alt="Royal Dynasty">
+                        <div class="flip-title">Royal Dynasty</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>Royal Dynasty</h3>
+                        <p class="director">Creator: Peter Morgan</p>
+                        <p class="flip-desc">A historical drama chronicling the reign of a powerful royal family through the decades.</p>
+                        <div class="flip-meta">
+                            <span><i class="fas fa-star"></i> 8.8</span>
+                            <span><i class="fas fa-calendar"></i> 2022</span>
+                        </div>
+                        <button class="flip-watch-btn"><i class="fas fa-play"></i> Watch</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Timeline -->
+    <section class="timeline-section">
+        <h2>Upcoming TV Show Releases</h2>
+        <div class="timeline-container">
+            <div class="timeline-controls">
+                <button class="timeline-prev"><i class="fas fa-arrow-left"></i></button>
+                <button class="timeline-next"><i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">May 25</div>
+                    <div class="timeline-content">
+                        <img src="https://image.tmdb.org/t/p/w500/hlLXt2tOPT6RRnjiUmoxyG1LTFi.jpg" alt="Medical Drama">
+                        <h3>Emergency Room</h3>
+                        <p>A medical drama following doctors in a busy urban hospital.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">June 15</div>
+                    <div class="timeline-content">
+                        <img src="https://images.unsplash.com/photo-1504813184591-01572f98c85f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Medical Drama">
+                        <h3>Emergency Room</h3>
+                        <p>A tense drama set in the high-pressure world of emergency medicine.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">June 30</div>
+                    <div class="timeline-content">
+                        <img src="https://image.tmdb.org/t/p/w500/tGsD7kCegBuI9MPCQkxkD4ErIvy.jpg" alt="Crime Thriller">
+                        <h3>Cold Case Files</h3>
+                        <p>A detective reopens unsolved cases with modern forensic techniques.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">July 18</div>
+                    <div class="timeline-content">
+                        <img src="https://image.tmdb.org/t/p/w500/gN0rCQKUQAaAzFXcQh0rOYQcOJA.jpg" alt="Superhero">
+                        <h3>Defenders</h3>
+                        <p>A team of unlikely heroes must save the world from an ancient threat.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">July 3</div>
+                    <div class="timeline-content">
+                        <img src="https://images.unsplash.com/photo-1534507199007-9cd7e5aa0a64?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Space Opera">
+                        <h3>Galactic Frontiers</h3>
+                        <p>Epic space adventures across unexplored galaxies.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">July 22</div>
+                    <div class="timeline-content">
+                        <img src="https://images.unsplash.com/photo-1551965581-2fdda6e3c45e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Crime Thriller">
+                        <h3>City Detectives</h3>
+                        <p>A gritty crime thriller following an elite detective unit.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">August 5</div>
+                    <div class="timeline-content">
+                        <img src="https://image.tmdb.org/t/p/w500/bGZn5RVzMMXju4ev7xbl1aLdXqq.jpg" alt="Fantasy">
+                        <h3>Mystic Realms</h3>
+                        <p>A young wizard discovers his destiny in a world of magic and monsters.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">August 11</div>
+                    <div class="timeline-content">
+                        <img src="https://images.unsplash.com/photo-1612036782180-6f0822045d55?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Superhero">
+                        <h3>The Protectors</h3>
+                        <p>Ordinary people discover extraordinary abilities in this superhero saga.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">August 30</div>
+                    <div class="timeline-content">
+                        <img src="https://images.unsplash.com/photo-1589656966895-2f33e7653819?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Fantasy">
+                        <h3>Realm of Magic</h3>
+                        <p>A fantasy series set in a world where magic is both a gift and a curse.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sign Up Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Join CineView</h2>
+                <span class="close-btn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Start your personalized streaming journey today with unlimited access to TV shows and movies.</p>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Create Password</label>
+                        <input type="password" id="password" placeholder="At least 8 characters" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="plan">Select Plan</label>
+                        <select id="plan" required>
+                            <option value="" disabled selected>Choose your plan</option>
+                            <option value="basic">Basic - $9.99/month</option>
+                            <option value="standard">Standard - $14.99/month</option>
+                            <option value="premium">Premium - $19.99/month</option>
+                        </select>
+                    </div>
+                    <div class="form-error" id="signupError"></div>
+                    <button type="submit" class="submit-btn">Create Account</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Already have an account? <a href="#" id="switchToLogin">Log In</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Welcome Back</h2>
+                <span class="close-btn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+                    <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <input type="checkbox" id="rememberMe">
+                            <label for="rememberMe" style="display: inline; margin-left: 5px;">Remember me</label>
+                        </div>
+                        <a href="#" id="forgotPassword" style="font-size: 0.9rem;">Forgot password?</a>
+                    </div>
+                    <div class="form-error" id="loginError"></div>
+                    <button type="submit" class="submit-btn">Log In</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Don't have an account? <a href="#" id="switchToSignup">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="video-modal">
+        <div class="video-modal-content">
+            <div class="video-modal-header">
+                <h3 id="videoModalTitle">Watch Trailer</h3>
+                <button class="video-modal-close">&times;</button>
+            </div>
+            <div class="video-container">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                </div>
+                <iframe allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>CineView</h2>
+                <p>The ultimate streaming experience</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Account</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Preferences</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 CineView. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Sample Data for Offline Mode -->
+    <script src="src/data/sample-movies.js"></script>
+    
+    <!-- Local Data Service (Replaced TMDB API) -->
+    <script src="src/scripts/local-data-service.js"></script>
+    <script src="src/scripts/main.js"></script>
+    <script src="src/scripts/sliders.js"></script>
+    <script src="src/scripts/video-player.js"></script>
+    <script src="src/scripts/tvshows.js"></script>
+    <script src="src/scripts/auth.js"></script>
+    
+    <!-- OMDB API Integration -->
+    <script type="module" src="src/js/tvshows-omdb.js"></script>
+</body>
+</html>

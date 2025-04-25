@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cineverse - TV Shows</title>
+    <link rel="stylesheet" href="../styles/theme.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/tvshows.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header will be loaded with JavaScript -->
+    <header id="header-placeholder"></header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Featured TV Show Carousel -->
+        <section class="featured-content">
+            <div class="carousel-container">
+                <!-- Carousel Slide 1 -->
+                <div class="carousel-slide active">
+                    <div class="carousel-image" style="background-image: url('../assets/images/tvshows/featured-1.jpg');">
+                        <div class="carousel-content">
+                            <div class="show-info">
+                                <h1>Stranger Things</h1>
+                                <div class="meta-info">
+                                    <span class="rating"><i class="fas fa-star"></i> 8.7</span>
+                                    <span class="year">2016-Present</span>
+                                    <span class="seasons">4 Seasons</span>
+                                </div>
+                                <p class="description">When a young boy disappears, his mother, a police chief, and his friends must confront terrifying supernatural forces in order to get him back.</p>
+                                <div class="action-buttons">
+                                    <button class="play-btn" data-video="https://www.youtube.com/embed/b9EkMc79ZSU" data-title="Stranger Things">
+                                        <i class="fas fa-play"></i> Watch Trailer
+                                    </button>
+                                    <button class="info-btn">
+                                        <i class="fas fa-info-circle"></i> More Info
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carousel Slide 2 -->
+                <div class="carousel-slide">
+                    <div class="carousel-image" style="background-image: url('../assets/images/tvshows/featured-2.jpg');">
+                        <div class="carousel-content">
+                            <div class="show-info">
+                                <h1>The Witcher</h1>
+                                <div class="meta-info">
+                                    <span class="rating"><i class="fas fa-star"></i> 8.2</span>
+                                    <span class="year">2019-Present</span>
+                                    <span class="seasons">2 Seasons</span>
+                                </div>
+                                <p class="description">Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked than beasts.</p>
+                                <div class="action-buttons">
+                                    <button class="play-btn" data-video="https://www.youtube.com/embed/ndl1W4ltcmg" data-title="The Witcher">
+                                        <i class="fas fa-play"></i> Watch Trailer
+                                    </button>
+                                    <button class="info-btn">
+                                        <i class="fas fa-info-circle"></i> More Info
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carousel Slide 3 -->
+                <div class="carousel-slide">
+                    <div class="carousel-image" style="background-image: url('../assets/images/tvshows/featured-3.jpg');">
+                        <div class="carousel-content">
+                            <div class="show-info">
+                                <h1>Breaking Bad</h1>
+                                <div class="meta-info">
+                                    <span class="rating"><i class="fas fa-star"></i> 9.5</span>
+                                    <span class="year">2008-2013</span>
+                                    <span class="seasons">5 Seasons</span>
+                                </div>
+                                <p class="description">A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine to secure his family's future.</p>
+                                <div class="action-buttons">
+                                    <button class="play-btn" data-video="https://www.youtube.com/embed/HhesaQXLuRY" data-title="Breaking Bad">
+                                        <i class="fas fa-play"></i> Watch Trailer
+                                    </button>
+                                    <button class="info-btn">
+                                        <i class="fas fa-info-circle"></i> More Info
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carousel Navigation -->
+                <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                
+                <!-- Carousel Indicators -->
+                <div class="carousel-indicators">
+                    <span class="indicator active"></span>
+                    <span class="indicator"></span>
+                    <span class="indicator"></span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Genre Filter Section -->
+        <section class="filter-section container">
+            <h2 class="section-title">Browse TV Shows</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Shows</button>
+                <button class="filter-btn" data-filter="drama">Drama</button>
+                <button class="filter-btn" data-filter="comedy">Comedy</button>
+                <button class="filter-btn" data-filter="scifi">Sci-Fi</button>
+                <button class="filter-btn" data-filter="fantasy">Fantasy</button>
+                <button class="filter-btn" data-filter="action">Action</button>
+            </div>
+        </section>
+        
+        <!-- TV Shows Grid Section -->
+        <section class="shows-grid container">
+            <div class="movies-container">
+                <!-- TV Show Card 1 -->
+                <div class="movie-card" data-genre="drama scifi">
+                    <img src="../assets/images/tvshows/show1.jpg" alt="Stranger Things" class="movie-poster">
+                    <div class="movie-details">
+                        <h3 class="movie-title">Stranger Things</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 8.7</span>
+                            <span class="movie-year">2016</span>
+                        </div>
+                        <p class="movie-desc">A group of kids face supernatural forces in a small town.</p>
+                        <button class="watch-btn" data-video="https://www.youtube.com/embed/b9EkMc79ZSU" data-title="Stranger Things">Watch Now</button>
+                    </div>
+                </div>
+                
+                <!-- TV Show Card 2 -->
+                <div class="movie-card" data-genre="fantasy action">
+                    <img src="../assets/images/tvshows/show2.jpg" alt="The Witcher" class="movie-poster">
+                    <div class="movie-details">
+                        <h3 class="movie-title">The Witcher</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 8.2</span>
+                            <span class="movie-year">2019</span>
+                        </div>
+                        <p class="movie-desc">A monster hunter struggles to find his place in a wicked world.</p>
+                        <button class="watch-btn" data-video="https://www.youtube.com/embed/ndl1W4ltcmg" data-title="The Witcher">Watch Now</button>
+                    </div>
+                </div>
+                
+                <!-- TV Show Card 3 -->
+                <div class="movie-card" data-genre="drama">
+                    <img src="../assets/images/tvshows/show3.jpg" alt="Breaking Bad" class="movie-poster">
+                    <div class="movie-details">
+                        <h3 class="movie-title">Breaking Bad</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 9.5</span>
+                            <span class="movie-year">2008</span>
+                        </div>
+                        <p class="movie-desc">A chemistry teacher turns to a life of crime.</p>
+                        <button class="watch-btn" data-video="https://www.youtube.com/embed/HhesaQXLuRY" data-title="Breaking Bad">Watch Now</button>
+                    </div>
+                </div>
+                
+                <!-- TV Show Card 4 -->
+                <div class="movie-card" data-genre="comedy">
+                    <img src="../assets/images/tvshows/show4.jpg" alt="The Office" class="movie-poster">
+                    <div class="movie-details">
+                        <h3 class="movie-title">The Office</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 8.9</span>
+                            <span class="movie-year">2005</span>
+                        </div>
+                        <p class="movie-desc">A mockumentary on a group of office workers.</p>
+                        <button class="watch-btn" data-video="https://www.youtube.com/embed/LHOtME2DL4g" data-title="The Office">Watch Now</button>
+                    </div>
+                </div>
+                
+                <!-- TV Show Card 5 -->
+                <div class="movie-card" data-genre="drama action">
+                    <img src="../assets/images/tvshows/show5.jpg" alt="Game of Thrones" class="movie-poster">
+                    <div class="movie-details">
+                        <h3 class="movie-title">Game of Thrones</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 9.3</span>
+                            <span class="movie-year">2011</span>
+                        </div>
+                        <p class="movie-desc">Noble families compete for control of the Seven Kingdoms.</p>
+                        <button class="watch-btn" data-video="https://www.youtube.com/embed/KPLWWIOCOOQ" data-title="Game of Thrones">Watch Now</button>
+                    </div>
+                </div>
+                
+                <!-- TV Show Card 6 -->
+                <div class="movie-card" data-genre="comedy">
+                    <img src="../assets/images/tvshows/show6.jpg" alt="Friends" class="movie-poster">
+                    <div class="movie-details">
+                        <h3 class="movie-title">Friends</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 8.5</span>
+                            <span class="movie-year">1994</span>
+                        </div>
+                        <p class="movie-desc">Follows the personal and professional lives of six friends.</p>
+                        <button class="watch-btn" data-video="https://www.youtube.com/embed/hDNNmeeJs1Q" data-title="Friends">Watch Now</button>
+                    </div>
+                </div>
+                
+                <!-- TV Show Card 7 -->
+                <div class="movie-card" data-genre="scifi action">
+                    <img src="../assets/images/tvshows/show7.jpg" alt="The Mandalorian" class="movie-poster">
+                    <div class="movie-details">
+                        <h3 class="movie-title">The Mandalorian</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 8.7</span>
+                            <span class="movie-year">2019</span>
+                        </div>
+                        <p class="movie-desc">A lone bounty hunter makes his way through the outer reaches of the galaxy.</p>
+                        <button class="watch-btn" data-video="https://www.youtube.com/embed/aOC8E8z_ifw" data-title="The Mandalorian">Watch Now</button>
+                    </div>
+                </div>
+                
+                <!-- TV Show Card 8 -->
+                <div class="movie-card" data-genre="drama scifi">
+                    <img src="../assets/images/tvshows/show8.jpg" alt="Black Mirror" class="movie-poster">
+                    <div class="movie-details">
+                        <h3 class="movie-title">Black Mirror</h3>
+                        <div class="movie-meta">
+                            <span class="movie-rating"><i class="fas fa-star"></i> 8.8</span>
+                            <span class="movie-year">2011</span>
+                        </div>
+                        <p class="movie-desc">An anthology series exploring technology's dark side.</p>
+                        <button class="watch-btn" data-video="https://www.youtube.com/embed/V0XOApF5nLU" data-title="Black Mirror">Watch Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Flip Cards Section -->
+        <section class="flip-cards-section container">
+            <h2 class="section-title">Featured Shows</h2>
+            <div class="flip-cards-container">
+                <!-- Flip Card 1 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front" style="background-image: url('../assets/images/tvshows/featured-flip-1.jpg');">
+                            <div class="flip-card-title">The Crown</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>The Crown</h3>
+                            <div class="flip-card-meta">
+                                <span><i class="fas fa-star"></i> 8.7</span>
+                                <span>2016</span>
+                            </div>
+                            <p>Follows the political rivalries and romance of Queen Elizabeth II's reign.</p>
+                            <button class="flip-watch-btn" data-video="https://www.youtube.com/embed/JWtnJjn6ng0" data-title="The Crown">Watch Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 2 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front" style="background-image: url('../assets/images/tvshows/featured-flip-2.jpg');">
+                            <div class="flip-card-title">The Boys</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>The Boys</h3>
+                            <div class="flip-card-meta">
+                                <span><i class="fas fa-star"></i> 8.7</span>
+                                <span>2019</span>
+                            </div>
+                            <p>A group of vigilantes set out to take down corrupt superheroes.</p>
+                            <button class="flip-watch-btn" data-video="https://www.youtube.com/embed/tcrNsIaQkb4" data-title="The Boys">Watch Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 3 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front" style="background-image: url('../assets/images/tvshows/featured-flip-3.jpg');">
+                            <div class="flip-card-title">Westworld</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Westworld</h3>
+                            <div class="flip-card-meta">
+                                <span><i class="fas fa-star"></i> 8.6</span>
+                                <span>2016</span>
+                            </div>
+                            <p>A dark odyssey about the dawn of artificial consciousness.</p>
+                            <button class="flip-watch-btn" data-video="https://www.youtube.com/embed/qLFBcdd6Qw0" data-title="Westworld">Watch Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flip Card 4 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front" style="background-image: url('../assets/images/tvshows/featured-flip-4.jpg');">
+                            <div class="flip-card-title">Succession</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Succession</h3>
+                            <div class="flip-card-meta">
+                                <span><i class="fas fa-star"></i> 8.8</span>
+                                <span>2018</span>
+                            </div>
+                            <p>The Roy family is known for controlling the biggest media and entertainment company in the world.</p>
+                            <button class="flip-watch-btn" data-video="https://www.youtube.com/embed/OzYxJV_rmE8" data-title="Succession">Watch Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Timeline Section -->
+        <section class="timeline-section container">
+            <h2 class="section-title">Historical Timeline</h2>
+            <div class="timeline-container">
+                <button class="timeline-prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="timeline">
+                    <!-- Timeline Item 1 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">1950s</div>
+                        <div class="timeline-content">
+                            <img src="../assets/images/tvshows/timeline-1.jpg" alt="1950s TV">
+                            <h3>The Golden Age</h3>
+                            <p>The beginning of television as a mainstream medium with classics like I Love Lucy.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 2 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">1960s</div>
+                        <div class="timeline-content">
+                            <img src="../assets/images/tvshows/timeline-2.jpg" alt="1960s TV">
+                            <h3>Cultural Revolution</h3>
+                            <p>Television becomes a cultural force with shows like Star Trek and The Twilight Zone.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 3 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">1970s</div>
+                        <div class="timeline-content">
+                            <img src="../assets/images/tvshows/timeline-3.jpg" alt="1970s TV">
+                            <h3>Social Commentary</h3>
+                            <p>Shows begin to tackle social issues with hits like All in the Family and M*A*S*H.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 4 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">1980s</div>
+                        <div class="timeline-content">
+                            <img src="../assets/images/tvshows/timeline-4.jpg" alt="1980s TV">
+                            <h3>Prime Time</h3>
+                            <p>The era of blockbuster series like Dallas, Dynasty, and The Cosby Show.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 5 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">1990s</div>
+                        <div class="timeline-content">
+                            <img src="../assets/images/tvshows/timeline-5.jpg" alt="1990s TV">
+                            <h3>Network Revolution</h3>
+                            <p>The rise of iconic sitcoms and dramas like Friends, Seinfeld, and ER.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 6 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">2000s</div>
+                        <div class="timeline-content">
+                            <img src="../assets/images/tvshows/timeline-6.jpg" alt="2000s TV">
+                            <h3>Reality TV Boom</h3>
+                            <p>Reality TV dominates with shows like Survivor and American Idol alongside dramas like The Sopranos.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 7 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">2010s</div>
+                        <div class="timeline-content">
+                            <img src="../assets/images/tvshows/timeline-7.jpg" alt="2010s TV">
+                            <h3>Streaming Era</h3>
+                            <p>The rise of streaming platforms and binge-watching with shows like Game of Thrones and Stranger Things.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Item 8 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">2020s</div>
+                        <div class="timeline-content">
+                            <img src="../assets/images/tvshows/timeline-8.jpg" alt="2020s TV">
+                            <h3>Content Explosion</h3>
+                            <p>Multiple streaming platforms competing with hundreds of original shows and global content.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="timeline-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer will be loaded with JavaScript -->
+    <footer id="footer-placeholder"></footer>
+    
+    <!-- Video Modal -->
+    <div class="video-modal">
+        <div class="video-modal-content">
+            <div class="video-player-header">
+                <h3>Video Player</h3>
+                <button class="close-video-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="video-container">
+                <div class="video-loading">
+                    <div class="spinner"></div>
+                </div>
+                <iframe id="videoPlayer" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/tvshows.js"></script>
+</body>
+</html> 

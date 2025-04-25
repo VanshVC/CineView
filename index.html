@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>CineView - Immersive Streaming Experience</title>
+    <link rel="stylesheet" href="src/styles/theme-reset.css">
+    <link rel="stylesheet" href="src/styles/theme.css">
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/modal.css">
+    <link rel="stylesheet" href="src/styles/video-player.css">
+    <link rel="stylesheet" href="src/styles/sliders.css">
+    <link rel="stylesheet" href="src/styles/api-components.css">
+    <link rel="stylesheet" href="src/styles/omdb-integration.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Diagnostic script to catch errors -->
+    <script>
+    window.addEventListener('error', function(e) {
+        console.error('Global error:', e.message, 'at', e.filename, ':', e.lineno);
+    });
+    
+    window.addEventListener('unhandledrejection', function(e) {
+        console.error('Unhandled Promise Rejection:', e.reason);
+    });
+    </script>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>CineView</h1>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="tvshows.html">TV Shows</a></li>
+                    <li><a href="mylist.html">My List</a></li>
+                    <li><a href="search.html">Search</a></li>
+                </ul>
+            </div>
+            <div class="nav-buttons">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+                <button class="login-btn">Log In</button>
+                <button class="signup-btn">Sign Up</button>
+            </div>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <video autoplay muted loop id="heroVideo">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-watching-a-movie-with-changing-scenes-14598-large.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay"></div>
+        </div>
+        <div class="hero-content">
+            <span class="hero-badge">Premium Experience</span>
+            <h1 class="glow-text">Unlimited Entertainment<br>at Your Fingertips</h1>
+            <p>Stream thousands of movies, TV shows, and exclusive originals on any device, anytime.</p>
+            <div class="hero-buttons">
+                <button class="cta-btn primary-btn"><i class="fas fa-play"></i> Start Watching</button>
+                <button class="cta-btn secondary-btn"><i class="fas fa-info-circle"></i> Learn More</button>
+            </div>
+            <div class="hero-features">
+                <div class="feature floating" style="animation-delay: 0.1s;">
+                    <i class="fas fa-film"></i>
+                    <span>4K Ultra HD</span>
+                </div>
+                <div class="feature floating" style="animation-delay: 0.3s;">
+                    <i class="fas fa-download"></i>
+                    <span>Download & Watch Offline</span>
+                </div>
+                <div class="feature floating" style="animation-delay: 0.5s;">
+                    <i class="fas fa-globe"></i>
+                    <span>Available Worldwide</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discover by Mood Section - NEW PROMINENT PLACEMENT -->
+    <section class="discover-by-mood fade-in">
+        <h2 class="section-title spotlight-text">Discover by Mood</h2>
+        <p class="section-subtitle">How are you feeling today? Let us recommend the perfect entertainment for your mood.</p>
+        
+        <div class="mood-grid">
+            <div class="mood-card gradient-bg" data-mood="happy" style="--gradient-color: #FF9A00">
+                <div class="mood-icon-large">
+                    <i class="fas fa-smile"></i>
+                </div>
+                <h3>Feel-Good</h3>
+                <p>Uplifting comedies and heartwarming stories</p>
+                <div class="mood-overlay">
+                    <button class="select-mood-btn pulse-effect">Lift My Spirits</button>
+                </div>
+            </div>
+            
+            <div class="mood-card gradient-bg" data-mood="exciting" style="--gradient-color: #E31C79">
+                <div class="mood-icon-large">
+                    <i class="fas fa-running"></i>
+                </div>
+                <h3>Action-Packed</h3>
+                <p>High-octane thrills and adrenaline rushes</p>
+                <div class="mood-overlay">
+                    <button class="select-mood-btn pulse-effect">Excite Me</button>
+                </div>
+            </div>
+            
+            <div class="mood-card gradient-bg" data-mood="romantic" style="--gradient-color: #FF5E94">
+                <div class="mood-icon-large">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Romantic</h3>
+                <p>Love stories and heartfelt connections</p>
+                <div class="mood-overlay">
+                    <button class="select-mood-btn pulse-effect">Make Me Swoon</button>
+                </div>
+            </div>
+            
+            <div class="mood-card gradient-bg" data-mood="scary" style="--gradient-color: #7209B7">
+                <div class="mood-icon-large">
+                    <i class="fas fa-ghost"></i>
+                </div>
+                <h3>Spine-Chilling</h3>
+                <p>Horror and suspense that keeps you on edge</p>
+                <div class="mood-overlay">
+                    <button class="select-mood-btn pulse-effect">Scare Me</button>
+                </div>
+            </div>
+            
+            <div class="mood-card gradient-bg" data-mood="thoughtful" style="--gradient-color: #4361EE">
+                <div class="mood-icon-large">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Thought-Provoking</h3>
+                <p>Cerebral narratives and mind-bending plots</p>
+                <div class="mood-overlay">
+                    <button class="select-mood-btn pulse-effect">Challenge Me</button>
+                </div>
+            </div>
+            
+            <div class="mood-card gradient-bg" data-mood="chill" style="--gradient-color: #00B4D8">
+                <div class="mood-icon-large">
+                    <i class="fas fa-couch"></i>
+                </div>
+                <h3>Easy Watching</h3>
+                <p>Light content perfect for relaxing</p>
+                <div class="mood-overlay">
+                    <button class="select-mood-btn pulse-effect">Help Me Unwind</button>
+                </div>
+            </div>
+            
+            <div class="mood-card gradient-bg" data-mood="nostalgic" style="--gradient-color: #6A994E">
+                <div class="mood-icon-large">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h3>Nostalgic</h3>
+                <p>Classics and throwbacks from another era</p>
+                <div class="mood-overlay">
+                    <button class="select-mood-btn pulse-effect">Take Me Back</button>
+                </div>
+            </div>
+            
+            <div class="mood-card gradient-bg" data-mood="epic" style="--gradient-color: #BC4749">
+                <div class="mood-icon-large">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <h3>Epic Adventure</h3>
+                <p>Grand sagas and breathtaking journeys</p>
+                <div class="mood-overlay">
+                    <button class="select-mood-btn pulse-effect">Amaze Me</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mood-results">
+            <div class="mood-results-header">
+                <h3>Recommended for your <span class="current-mood">mood</span></h3>
+                <button class="close-results"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="mood-results-container">
+                <!-- Results will be dynamically populated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Script for Discover by Mood functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get elements
+            const moodCards = document.querySelectorAll('.discover-by-mood .mood-card');
+            const moodResults = document.querySelector('.discover-by-mood .mood-results');
+            const moodResultsContainer = document.querySelector('.discover-by-mood .mood-results-container');
+            const currentMoodSpan = document.querySelector('.current-mood');
+            const closeResultsBtn = document.querySelector('.close-results');
+            
+            // Define movie content for each mood
+            const moodContent = {
+                happy: {
+                    title: 'Feel-Good',
+                    movies: [
+                        {title: 'Forrest Gump', year: 1994, rating: 8.8, image: 'https://image.tmdb.org/t/p/w500/8kSerJrhrJWKLk1LViesGcnrUPE.jpg'},
+                        {title: 'The Intouchables', year: 2011, rating: 8.5, image: 'https://image.tmdb.org/t/p/w500/323BP0itpxTsO0skTwdnVmf7YC9.jpg'},
+                        {title: "Ferris Bueller's Day Off", year: 1986, rating: 7.9, image: 'https://image.tmdb.org/t/p/w500/9LTQNCvoLsKXP0LtaKAaC5YOUzK.jpg'},
+                        {title: 'Little Miss Sunshine', year: 2006, rating: 7.8, image: 'https://image.tmdb.org/t/p/w500/CtmE6CzXfHHHlQrWzxC3ajaqR4h.jpg'},
+                        {title: 'The Princess Bride', year: 1987, rating: 8.0, image: 'https://image.tmdb.org/t/p/w500/dvjqlp2sAhUeFjUOfQDgqwpphHj.jpg'}
+                    ]
+                },
+                exciting: {
+                    title: 'Action-Packed',
+                    movies: [
+                        {title: 'Die Hard', year: 1988, rating: 8.2, image: 'https://image.tmdb.org/t/p/w500/yFihWxQcmqcaBR31QM6Y8gT6aYV.jpg'},
+                        {title: 'Mad Max: Fury Road', year: 2015, rating: 8.1, image: 'https://image.tmdb.org/t/p/w500/hA2ple9q4qnwxp3hKVNhroW8zQn.jpg'},
+                        {title: 'John Wick', year: 2014, rating: 7.4, image: 'https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Pd8.jpg'},
+                        {title: 'Mission: Impossible - Fallout', year: 2018, rating: 7.7, image: 'https://image.tmdb.org/t/p/w500/AkJQpZp9WoNdj7pLYSj1L0RcMMN.jpg'},
+                        {title: 'The Raid', year: 2011, rating: 7.6, image: 'https://image.tmdb.org/t/p/w500/pNuEEG49hmzSJABLXiWzPTiAQgB.jpg'}
+                    ]
+                },
+                romantic: {
+                    title: 'Romantic',
+                    movies: [
+                        {title: 'The Notebook', year: 2004, rating: 7.8, image: 'https://image.tmdb.org/t/p/w500/rNzQyW4f8B8cQeg7Dgj3n6eT5k9.jpg'},
+                        {title: 'Pride & Prejudice', year: 2005, rating: 7.8, image: 'https://image.tmdb.org/t/p/w500/sZGYgMpaMkO6vWY7Un3NeFw4Who.jpg'},
+                        {title: 'Before Sunrise', year: 1995, rating: 8.1, image: 'https://image.tmdb.org/t/p/w500/9akij7PqZ1g6zl42DQQTtL9CTSb.jpg'},
+                        {title: 'La La Land', year: 2016, rating: 8.0, image: 'https://image.tmdb.org/t/p/w500/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg'},
+                        {title: 'Eternal Sunshine of the Spotless Mind', year: 2004, rating: 8.3, image: 'https://image.tmdb.org/t/p/w500/5MwkWH9tYHv3mV9OdYTMR5qreIz.jpg'}
+                    ]
+                },
+                scary: {
+                    title: 'Spine-Chilling',
+                    movies: [
+                        {title: 'The Shining', year: 1980, rating: 8.4, image: 'https://image.tmdb.org/t/p/w500/b6ko0IKC8MdYBBPkkA1aBPLe2hy.jpg'},
+                        {title: 'Hereditary', year: 2018, rating: 7.3, image: 'https://image.tmdb.org/t/p/w500/7VdEjPFR6ffVlKYtbaPz6yy2vx7.jpg'},
+                        {title: 'Get Out', year: 2017, rating: 7.7, image: 'https://image.tmdb.org/t/p/w500/tFXcEccSQMf3lfxGX4g5kBAVqql.jpg'},
+                        {title: 'The Exorcist', year: 1973, rating: 8.0, image: 'https://image.tmdb.org/t/p/w500/4ucLGcXVVSVnsfkGtbLY4XAius8.jpg'},
+                        {title: 'A Quiet Place', year: 2018, rating: 7.5, image: 'https://image.tmdb.org/t/p/w500/nAU74GmpUk7t5iklEp3bufwDq4n.jpg'}
+                    ]
+                },
+                thoughtful: {
+                    title: 'Thought-Provoking',
+                    movies: [
+                        {title: 'Inception', year: 2010, rating: 8.8, image: 'https://image.tmdb.org/t/p/w500/8IB2e4r4oVhHnANbnm7O3Tj6tF8.jpg'},
+                        {title: 'The Shawshank Redemption', year: 1994, rating: 9.3, image: 'https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg'},
+                        {title: 'Interstellar', year: 2014, rating: 8.6, image: 'https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg'},
+                        {title: 'Arrival', year: 2016, rating: 7.9, image: 'https://image.tmdb.org/t/p/w500/x2FJsf1ElAgr63Y3PNPtJrcmpoe.jpg'},
+                        {title: 'The Prestige', year: 2006, rating: 8.5, image: 'https://image.tmdb.org/t/p/w500/5MlvT4DZIdkpb7A9T2wt6jdDk7c.jpg'}
+                    ]
+                },
+                chill: {
+                    title: 'Easy Watching',
+                    movies: [
+                        {title: 'The Secret Life of Walter Mitty', year: 2013, rating: 7.3, image: 'https://image.tmdb.org/t/p/w500/oeLXrK4YGUpVB2YPXXzvfiE1vd9.jpg'},
+                        {title: 'Chef', year: 2014, rating: 7.3, image: 'https://image.tmdb.org/t/p/w500/pbZJUbA3UQZjLXSM5KGiNJgcF0k.jpg'},
+                        {title: 'The Grand Budapest Hotel', year: 2014, rating: 8.1, image: 'https://image.tmdb.org/t/p/w500/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg'},
+                        {title: 'Soul', year: 2020, rating: 8.1, image: 'https://image.tmdb.org/t/p/w500/hm58Jw4Lw8OIeECIq5qyPYhAeRJ.jpg'},
+                        {title: 'Amelie', year: 2001, rating: 8.3, image: 'https://image.tmdb.org/t/p/w500/niqc3vVxs8jJHm7KNIYvLwzzKCZ.jpg'}
+                    ]
+                },
+                nostalgic: {
+                    title: 'Nostalgic',
+                    movies: [
+                        {title: 'Back to the Future', year: 1985, rating: 8.5, image: 'https://image.tmdb.org/t/p/w500/fNOH9f1aA7XRTzl1sAOx9iF553Q.jpg'},
+                        {title: 'The Goonies', year: 1985, rating: 7.8, image: 'https://image.tmdb.org/t/p/w500/eBU7gCjTCj9n2LTxvCSs51B3Doe.jpg'},
+                        {title: 'E.T. the Extra-Terrestrial', year: 1982, rating: 7.9, image: 'https://image.tmdb.org/t/p/w500/an0nD6uq6byfxXCfk6lQBzdL2J1.jpg'},
+                        {title: 'Stand by Me', year: 1986, rating: 8.1, image: 'https://image.tmdb.org/t/p/w500/7QsV7jTbWYFpKUGghgZNMgZ9QYH.jpg'},
+                        {title: 'The Breakfast Club', year: 1985, rating: 7.9, image: 'https://image.tmdb.org/t/p/w500/c0bdI7YuCFQrU0WzXEqvSWyoqR7.jpg'}
+                    ]
+                },
+                epic: {
+                    title: 'Epic Adventure',
+                    movies: [
+                        {title: 'The Lord of the Rings: The Fellowship of the Ring', year: 2001, rating: 8.8, image: 'https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg'},
+                        {title: 'Gladiator', year: 2000, rating: 8.5, image: 'https://image.tmdb.org/t/p/w500/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg'},
+                        {title: 'Dune', year: 2021, rating: 8.0, image: 'https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg'},
+                        {title: 'Avatar', year: 2009, rating: 7.8, image: 'https://image.tmdb.org/t/p/w500/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg'},
+                        {title: 'Lawrence of Arabia', year: 1962, rating: 8.3, image: 'https://image.tmdb.org/t/p/w500/6gLjX5dOEVlXTppyVRCm3AmX6sJ.jpg'}
+                    ]
+                }
+            };
+            
+            // Handle mood selection
+            if (moodCards) {
+                moodCards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        const mood = this.getAttribute('data-mood');
+                        const moodData = moodContent[mood];
+                        
+                        if (moodData) {
+                            // Update current mood text
+                            if (currentMoodSpan) {
+                                currentMoodSpan.textContent = moodData.title;
+                            }
+                            
+                            // Show loading state
+                            moodResultsContainer.innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Finding the perfect content...</div>';
+                            moodResults.classList.add('active');
+                            
+                            // Scroll to results
+                            setTimeout(() => {
+                                moodResults.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }, 100);
+                            
+                            // Load content with delay for effect
+                            setTimeout(() => {
+                                // Generate HTML for movie recommendations
+                                const moviesHTML = moodData.movies.map(movie => {
+                                    return `
+                                        <div class="movie-card">
+                                            <div class="movie-poster">
+                                                <img src="${movie.image}" alt="${movie.title}">
+                                                <span class="content-rating">${movie.rating.toFixed(1)}</span>
+                                            </div>
+                                            <div class="movie-details">
+                                                <h3>${movie.title}</h3>
+                                                <div class="movie-meta">
+                                                    <span class="year">${movie.year}</span>
+                                                    <span class="rating"><i class="fas fa-star"></i> ${movie.rating.toFixed(1)}</span>
+                                                </div>
+                                                <div class="card-actions">
+                                                    <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                                                    <button class="info-btn"><i class="fas fa-info-circle"></i> Details</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('');
+                                
+                                moodResultsContainer.innerHTML = moviesHTML;
+                            }, 1500);
+                        }
+                    });
+                });
+            }
+            
+            // Close mood results
+            if (closeResultsBtn) {
+                closeResultsBtn.addEventListener('click', () => {
+                    moodResults.classList.remove('active');
+                });
+            }
+        });
+    </script>
+
+    <!-- Genre Filters -->
+    <section class="genre-filters fade-in">
+        <h2 class="section-title">Browse by Genre</h2>
+        <div class="filter-buttons">
+            <!-- Genre buttons will be dynamically populated -->
+        </div>
+    </section>
+
+    <!-- Trending Movies -->
+    <section class="trending slide-up">
+        <h2 class="section-title">Trending Now</h2>
+        <div class="slider-wrapper">
+            <div id="trending-movies" class="movies-slider carousel-style">
+                <!-- Movie cards statically inserted -->
+                <div class="movie-card" data-movie-id="1">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg" alt="Oppenheimer">
+                        <span class="content-rating">R</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Oppenheimer</h3>
+                        <div class="movie-meta">
+                            <span class="year">2023</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.2</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.4</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 180 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Christopher Nolan" data-overview="The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-movie-id="2">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/A7SobaUTvb6d5Z3dpOhFxPG0RQf.jpg" alt="Dune">
+                        <span class="content-rating">PG-13</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Dune</h3>
+                        <div class="movie-meta">
+                            <span class="year">2021</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.0</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.0</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 155 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Denis Villeneuve" data-overview="A noble family becomes embroiled in a war for control over the galaxy's most valuable resource..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-movie-id="3">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg" alt="Guardians of the Galaxy Vol. 3">
+                        <span class="content-rating">PG-13</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Guardians of the Galaxy Vol. 3</h3>
+                        <div class="movie-meta">
+                            <span class="year">2023</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.0</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 7.9</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 150 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="James Gunn" data-overview="Still reeling from the loss of Gamora, Peter Quill rallies his team to defend the universe..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-movie-id="4">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" alt="Barbie">
+                        <span class="content-rating">PG-13</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Barbie</h3>
+                        <div class="movie-meta">
+                            <span class="year">2023</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 3.7</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 7.3</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 114 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Greta Gerwig" data-overview="Barbie and Ken are having the time of their lives in the colorful and seemingly perfect world of Barbie Land..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-movie-id="5">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg" alt="John Wick: Chapter 4">
+                        <span class="content-rating">R</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>John Wick: Chapter 4</h3>
+                        <div class="movie-meta">
+                            <span class="year">2023</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 3.9</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 7.8</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 169 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Chad Stahelski" data-overview="John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, he must face off against a new enemy..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-movie-id="6">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/NNxYkU70HPurnNCSiCjYAmacwm.jpg" alt="Mission: Impossible - Dead Reckoning">
+                        <span class="content-rating">PG-13</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Mission: Impossible - Dead Reckoning</h3>
+                        <div class="movie-meta">
+                            <span class="year">2023</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 3.9</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 7.8</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 163 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Christopher McQuarrie" data-overview="Ethan Hunt and his IMF team must track down a dangerous weapon before it falls into the wrong hands..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="movie-card" data-movie-id="7">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg" alt="The Batman">
+                        <span class="content-rating">PG-13</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>The Batman</h3>
+                        <div class="movie-meta">
+                            <span class="year">2022</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.0</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 7.8</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 176 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Matt Reeves" data-overview="When the Riddler, a sadistic serial killer, begins murdering key political figures in Gotham, Batman is forced to investigate the city's hidden corruption..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="movie-card" data-movie-id="8">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg" alt="Black Panther: Wakanda Forever">
+                        <span class="content-rating">PG-13</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Black Panther: Wakanda Forever</h3>
+                        <div class="movie-meta">
+                            <span class="year">2022</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 3.7</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 6.7</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 161 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Ryan Coogler" data-overview="Queen Ramonda, Shuri, M'Baku, Okoye and the Dora Milaje fight to protect their nation from intervening world powers after the death of King T'Challa..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="movie-card" data-movie-id="9">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg" alt="Avengers: Infinity War">
+                        <span class="content-rating">PG-13</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Avengers: Infinity War</h3>
+                        <div class="movie-meta">
+                            <span class="year">2018</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.2</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.4</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 149 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Anthony Russo, Joe Russo" data-overview="As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="movie-card" data-movie-id="10">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/kuf6dutpsT0vSVehic3EZIqkOBt.jpg" alt="Dune: Part Two">
+                        <span class="content-rating">PG-13</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Dune: Part Two</h3>
+                        <div class="movie-meta">
+                            <span class="year">2024</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.2</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.5</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 166 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Denis Villeneuve" data-overview="Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="movie-card" data-movie-id="11">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/uJYYizSuA9Y3DCs1fFliCnDSZtG.jpg" alt="Spider-Man: No Way Home">
+                        <span class="content-rating">PG-13</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Spider-Man: No Way Home</h3>
+                        <div class="movie-meta">
+                            <span class="year">2021</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.0</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.2</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 148 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Jon Watts" data-overview="With Spider-Man's identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="movie-card" data-movie-id="12">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/b0Ej6fnXAP8fK75hlyi2jKqdhHz.jpg" alt="The Shawshank Redemption">
+                        <span class="content-rating">R</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>The Shawshank Redemption</h3>
+                        <div class="movie-meta">
+                            <span class="year">1994</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.5</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 9.3</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 142 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Frank Darabont" data-overview="Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Watch It Again -->
+    <section class="watch-again slide-up">
+        <h2 class="section-title">Watch It Again</h2>
+        <div class="slider-wrapper">
+            <div id="watch-again-content" class="movies-slider snap-scroll-style">
+                <!-- Movie cards will be dynamically inserted -->
+                <div class="movie-card" data-movie-id="wa1">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/b0Ej6fnXAP8fK75hlyi2jKqdhHz.jpg" alt="The Shawshank Redemption">
+                        <span class="content-rating">R</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>The Shawshank Redemption</h3>
+                        <div class="movie-meta">
+                            <span class="year">1994</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.5</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 9.3</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 142 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Frank Darabont" data-overview="Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card" data-movie-id="wa2">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg" alt="Avengers: Infinity War">
+                        <span class="content-rating">PG-13</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Avengers: Infinity War</h3>
+                        <div class="movie-meta">
+                            <span class="year">2018</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.2</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.4</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 149 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Anthony Russo, Joe Russo" data-overview="As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card" data-movie-id="wa3">
+                    <div class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMDZkYmVhNjMtNWU4MC00MDQxLWE3MjYtZGMzZWI1ZjhlOWJmXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg" alt="Stranger Things">
+                        <span class="content-rating">TV-14</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Stranger Things</h3>
+                        <div class="movie-meta">
+                            <span class="year">2016-Present</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.3</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.7</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 50 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="The Duffer Brothers" data-overview="When a young boy disappears, his mother, a police chief, and his friends must confront terrifying supernatural forces in order to get him back."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular On CineView -->
+    <section class="popular-on slide-up">
+        <h2 class="section-title">Popular On CineView</h2>
+        <div class="slider-wrapper">
+            <div id="popular-content" class="movies-slider carousel-style">
+                <!-- Movie cards will be dynamically inserted -->
+                <div class="movie-card" data-movie-id="p1">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg" alt="Oppenheimer">
+                        <span class="content-rating">R</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Oppenheimer</h3>
+                        <div class="movie-meta">
+                            <span class="year">2023</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.2</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.4</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 180 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Christopher Nolan" data-overview="The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card" data-movie-id="p2">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/kuf6dutpsT0vSVehic3EZIqkOBt.jpg" alt="Dune: Part Two">
+                        <span class="content-rating">PG-13</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Dune: Part Two</h3>
+                        <div class="movie-meta">
+                            <span class="year">2024</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.2</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.5</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 166 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Denis Villeneuve" data-overview="Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card" data-movie-id="p3">
+                    <div class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNDkyZThhNmMtZDBjYS00NDBmLTlkMjgtNWM2ZWYzZDQxZWU1XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_.jpg" alt="Breaking Bad">
+                        <span class="content-rating">TV-MA</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Breaking Bad</h3>
+                        <div class="movie-meta">
+                            <span class="year">2008-2013</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.5</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 9.5</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 49 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Vince Gilligan" data-overview="A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Continue Watching On -->
+    <section class="continue-watching-on slide-up">
+        <h2 class="section-title">Continue Watching On</h2>
+        <div class="slider-wrapper">
+            <div id="continue-watching-content" class="movies-slider snap-scroll-style">
+                <!-- Movie cards will be dynamically inserted -->
+                <div class="movie-card" data-movie-id="cw1">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/qW4crfED8mpNDadSmMdi7ZDzhXF.jpg" alt="The Batman">
+                        <span class="content-rating">PG-13</span>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                    <div class="movie-details">
+                        <h3>The Batman</h3>
+                        <div class="movie-meta">
+                            <span class="year">2022</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.0</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 7.8</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 176 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Continue</button>
+                            <button class="info-btn" data-director="Matt Reeves" data-overview="When the Riddler, a sadistic serial killer, begins murdering key political figures in Gotham, Batman is forced to investigate the city's hidden corruption..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card" data-movie-id="cw2">
+                    <div class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BYTRiNDQwYzAtMzVlZS00NTI5LWJjYjUtMzkwNTUzMWMxZTllXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_.jpg" alt="Game of Thrones">
+                        <span class="content-rating">TV-MA</span>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 32%;"></div>
+                        </div>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Game of Thrones</h3>
+                        <div class="movie-meta">
+                            <span class="year">2011-2019</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.4</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 9.2</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 60 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Continue</button>
+                            <button class="info-btn" data-director="David Benioff, D.B. Weiss" data-overview="Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card" data-movie-id="cw3">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" alt="Barbie">
+                        <span class="content-rating">PG-13</span>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 78%;"></div>
+                        </div>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Barbie</h3>
+                        <div class="movie-meta">
+                            <span class="year">2023</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 3.7</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 7.3</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 114 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Continue</button>
+                            <button class="info-btn" data-director="Greta Gerwig" data-overview="Barbie and Ken are having the time of their lives in the colorful and seemingly perfect world of Barbie Land..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular TV Shows -->
+    <section class="tv-shows slide-up">
+        <h2 class="section-title">Popular TV Shows</h2>
+        <div class="slider-wrapper">
+            <div id="tv-shows" class="movies-slider snap-scroll-style">
+                <!-- TV show cards -->
+                <div class="movie-card" data-genre="drama,thriller" data-movie-id="tv1">
+                    <div class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMDZkYmVhNjMtNWU4MC00MDQxLWE3MjYtZGMzZWI1ZjhlOWJmXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg" alt="Stranger Things">
+                        <span class="content-rating">TV-14</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Stranger Things</h3>
+                        <div class="movie-meta">
+                            <span class="year">2016-Present</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.3</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.7</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 50 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="The Duffer Brothers" data-overview="When a young boy disappears, his mother, a police chief, and his friends must confront terrifying supernatural forces in order to get him back."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-genre="drama,fantasy" data-movie-id="tv2">
+                    <div class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BYTRiNDQwYzAtMzVlZS00NTI5LWJjYjUtMzkwNTUzMWMxZTllXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_.jpg" alt="Game of Thrones">
+                        <span class="content-rating">TV-MA</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Game of Thrones</h3>
+                        <div class="movie-meta">
+                            <span class="year">2011-2019</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.4</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 9.2</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 60 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="David Benioff, D.B. Weiss" data-overview="Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-genre="drama,crime" data-movie-id="tv3">
+                    <div class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNDkyZThhNmMtZDBjYS00NDBmLTlkMjgtNWM2ZWYzZDQxZWU1XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_.jpg" alt="Breaking Bad">
+                        <span class="content-rating">TV-MA</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Breaking Bad</h3>
+                        <div class="movie-meta">
+                            <span class="year">2008-2013</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.5</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 9.5</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 49 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Vince Gilligan" data-overview="A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-genre="comedy,drama" data-movie-id="tv4">
+                    <div class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMDNkOTE4NDQtMTNmYi00MWE0LWE4ZTktYTc0NzhhNWIzNzJiXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_.jpg" alt="The Office">
+                        <span class="content-rating">TV-14</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>The Office</h3>
+                        <div class="movie-meta">
+                            <span class="year">2005-2013</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.2</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.9</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 22 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Greg Daniels" data-overview="A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-genre="drama,sci-fi" data-movie-id="tv5">
+                    <div class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMWI0OTJlYTItNzMwZi00MzM2LWE2MzktMDZkOTE1ZGRmMGYwXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg" alt="The Mandalorian">
+                        <span class="content-rating">TV-14</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>The Mandalorian</h3>
+                        <div class="movie-meta">
+                            <span class="year">2019-Present</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.3</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.7</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 40 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Jon Favreau" data-overview="After the fall of the Galactic Empire, a lone gunfighter makes his way through the lawless galaxy with his alien companion."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-genre="drama,horror" data-movie-id="tv6">
+                    <div class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZmU5NTcwNjktODIwMi00ZmZkLTk4ZWUtYzVjZWQ5ZTZjN2RlXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg" alt="The Walking Dead">
+                        <span class="content-rating">TV-MA</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>The Walking Dead</h3>
+                        <div class="movie-meta">
+                            <span class="year">2010-2022</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.0</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.1</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 44 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Frank Darabont" data-overview="Sheriff Deputy Rick Grimes wakes up from a coma to learn the world is in ruins and must lead a group of survivors to stay alive."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-genre="drama,crime" data-movie-id="tv7">
+                    <div class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZDA4YmE0OTYtMmRmNS00MzM2LWE2MzktMDZkOTE1ZGRmMGYwXkEyXkFqcGdeQXVyMTMzNDExODE5._V1_.jpg" alt="Better Call Saul">
+                        <span class="content-rating">TV-MA</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Better Call Saul</h3>
+                        <div class="movie-meta">
+                            <span class="year">2015-2022</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.4</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.9</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 46 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Vince Gilligan, Peter Gould" data-overview="The trials and tribulations of criminal lawyer Jimmy McGill before his transformation into Saul Goodman, criminal lawyer."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-card" data-genre="comedy,drama" data-movie-id="tv8">
+                    <div class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNDVkYjU0MzctMWRmZi00NTkxLTgwZWEtOWVhYjZlYjllYmU4XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg" alt="Friends">
+                        <span class="content-rating">TV-14</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Friends</h3>
+                        <div class="movie-meta">
+                            <span class="year">1994-2004</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.2</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.8</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 22 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="David Crane, Marta Kauffman" data-overview="Follows the personal and professional lives of six twenty to thirty-something-year-old friends living in Manhattan."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="slider-pagination">
+            <span class="pagination-dot active"></span>
+            <span class="pagination-dot"></span>
+            <span class="pagination-dot"></span>
+            <span class="pagination-dot"></span>
+        </div>
+    </section>
+
+    <!-- Crowd Pleasers -->
+    <section class="crowd-pleasers slide-up">
+        <h2 class="section-title">Crowd Pleasers</h2>
+        <div class="slider-wrapper">
+            <div id="crowd-pleasers" class="movies-slider snap-scroll-style">
+                <div class="movie-card" data-movie-id="cp1">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="The Shawshank Redemption">
+                        <span class="content-rating">R</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>The Shawshank Redemption</h3>
+                        <div class="movie-meta">
+                            <span class="year">1994</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.5</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 9.3</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 142 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Frank Darabont" data-overview="Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card" data-movie-id="cp2">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg" alt="The Godfather">
+                        <span class="content-rating">R</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>The Godfather</h3>
+                        <div class="movie-meta">
+                            <span class="year">1972</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.4</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 9.2</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 175 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Francis Ford Coppola" data-overview="Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card" data-movie-id="cp3">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/8kSerJrhrJWKLk1LViesGcnrUPE.jpg" alt="Forrest Gump">
+                        <span class="content-rating">PG-13</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Forrest Gump</h3>
+                        <div class="movie-meta">
+                            <span class="year">1994</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.3</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.8</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 142 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Robert Zemeckis" data-overview="A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Movies -->
+    <section class="action-movies slide-up">
+        <h2 class="section-title">Action Movies</h2>
+        <div class="slider-wrapper">
+            <div id="action-movies" class="movies-slider carousel-style">
+                <div class="movie-card" data-movie-id="am1">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg" alt="John Wick: Chapter 4">
+                        <span class="content-rating">R</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>John Wick: Chapter 4</h3>
+                        <div class="movie-meta">
+                            <span class="year">2023</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 3.9</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 7.8</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 169 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Chad Stahelski" data-overview="John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, he must face off against a new enemy..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card" data-movie-id="am2">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/NNxYkU70HPurnNCSiCjYAmacwm.jpg" alt="Mission: Impossible - Dead Reckoning">
+                        <span class="content-rating">PG-13</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Mission: Impossible - Dead Reckoning</h3>
+                        <div class="movie-meta">
+                            <span class="year">2023</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 3.9</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 7.8</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 163 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Christopher McQuarrie" data-overview="Ethan Hunt and his IMF team must track down a dangerous weapon before it falls into the wrong hands..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card" data-movie-id="am3">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg" alt="Avengers: Infinity War">
+                        <span class="content-rating">PG-13</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Avengers: Infinity War</h3>
+                        <div class="movie-meta">
+                            <span class="year">2018</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.2</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.4</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 149 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Anthony Russo, Joe Russo" data-overview="As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- K-Dramas -->
+    <section class="k-dramas slide-up">
+        <h2 class="section-title">K-Dramas</h2>
+        <div class="slider-wrapper">
+            <div id="k-dramas" class="movies-slider snap-scroll-style">
+                <div class="movie-card" data-movie-id="kd1">
+                    <div class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZDI3OWE0ZWMtNGJjOS00N2ZmLWE5ODctOWI1Mzc5OTY1NWIzXkEyXkFqcGdeQXVyMTEzMTI1Mjk3._V1_.jpg" alt="Squid Game">
+                        <span class="content-rating">TV-MA</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Squid Game</h3>
+                        <div class="movie-meta">
+                            <span class="year">2021-Present</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.2</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.0</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 60 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Hwang Dong-hyuk" data-overview="Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits — with deadly high stakes."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card" data-movie-id="kd2">
+                    <div class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BOGYwMmQwMWUtNDYzNC00YTJhLTk0MWUtZmNhZDdmNmQ0MzI0XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_.jpg" alt="Crash Landing on You">
+                        <span class="content-rating">TV-14</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Crash Landing on You</h3>
+                        <div class="movie-meta">
+                            <span class="year">2019</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.3</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.7</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 70 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Lee Jung-hyo" data-overview="A South Korean heiress accidentally crash-lands in North Korea. There, she meets and falls in love with an army officer who decides to help her hide."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card" data-movie-id="kd3">
+                    <div class="movie-poster">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZDI0OWI2MDItZDJlNi00MzM2LWE2MzktMDZkOTE1ZGRmMGYwXkEyXkFqcGdeQXVyMTEzMTI1Mjk3._V1_.jpg" alt="All of Us Are Dead">
+                        <span class="content-rating">TV-MA</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>All of Us Are Dead</h3>
+                        <div class="movie-meta">
+                            <span class="year">2022</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.1</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 7.5</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 60 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Lee Jae-kyoo, Kim Nam-su" data-overview="A high school becomes ground zero for a zombie virus outbreak. Trapped students must fight their way out or turn into one of the rabid infected."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horror Movies -->
+    <section class="horror-movies slide-up">
+        <h2 class="section-title">Horror Movies</h2>
+        <div class="slider-wrapper">
+            <div id="horror-movies" class="movies-slider carousel-style">
+                <div class="movie-card" data-movie-id="hm1">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/wRYZrz85WL4KfYAyRZVHyCjgVLv.jpg" alt="The Exorcist">
+                        <span class="content-rating">R</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>The Exorcist</h3>
+                        <div class="movie-meta">
+                            <span class="year">1973</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.2</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 8.0</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 122 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="William Friedkin" data-overview="12-year-old Regan MacNeil begins to adapt an explicit new personality as strange events befall the local area of Georgetown. Her mother becomes torn between science and superstition in a desperate bid to save her daughter..."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card" data-movie-id="hm2">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/7VdEjPFR6ffVlKYtbaPz6yy2vx7.jpg" alt="Hereditary">
+                        <span class="content-rating">R</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>Hereditary</h3>
+                        <div class="movie-meta">
+                            <span class="year">2018</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 4.0</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 7.3</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 127 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="Ari Aster" data-overview="When Ellen, the matriarch of the Graham family, passes away, her daughter's family begins to unravel cryptic and increasingly terrifying secrets about their ancestry."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="movie-card" data-movie-id="hm3">
+                    <div class="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/bdD1s9USJGFTedPpnCR64RaEDVq.jpg" alt="The Conjuring">
+                        <span class="content-rating">R</span>
+                    </div>
+                    <div class="movie-details">
+                        <h3>The Conjuring</h3>
+                        <div class="movie-meta">
+                            <span class="year">2013</span>
+                            <span class="rating tmdb-rating"><i class="fas fa-star"></i> 3.9</span>
+                            <span class="rating imdb-rating"><i class="fab fa-imdb"></i> 7.5</span>
+                            <span class="runtime"><i class="fas fa-clock"></i> 112 min</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                            <button class="info-btn" data-director="James Wan" data-overview="Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse."><i class="fas fa-info-circle"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Mood Selector -->
+    <section class="mood-selector slide-up">
+        <h2 class="section-title">What Are You In The Mood For?</h2>
+        <div class="mood-container">
+            <div class="mood-card" data-mood="happy">
+                <div class="mood-icon">
+                    <i class="fas fa-smile"></i>
+                </div>
+                <h3>Happy</h3>
+                <div class="mood-overlay">
+                    <button class="select-mood-btn">Show Me Happy</button>
+                </div>
+            </div>
+            <div class="mood-card" data-mood="romantic">
+                <div class="mood-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Romantic</h3>
+                <div class="mood-overlay">
+                    <button class="select-mood-btn">Show Me Romance</button>
+                </div>
+            </div>
+            <div class="mood-card" data-mood="thrilling">
+                <div class="mood-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Thrilling</h3>
+                <div class="mood-overlay">
+                    <button class="select-mood-btn">Show Me Thrills</button>
+                </div>
+            </div>
+            <div class="mood-card" data-mood="thoughtful">
+                <div class="mood-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Thoughtful</h3>
+                <div class="mood-overlay">
+                    <button class="select-mood-btn">Make Me Think</button>
+                </div>
+            </div>
+            <div class="mood-card" data-mood="nostalgic">
+                <div class="mood-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h3>Nostalgic</h3>
+                <div class="mood-overlay">
+                    <button class="select-mood-btn">Take Me Back</button>
+                </div>
+            </div>
+        </div>
+        <div class="mood-results">
+            <h3>Recommendations for you</h3>
+            <div class="mood-results-container">
+                <!-- Results will be dynamically populated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Movie Quiz Section -->
+    <section class="movie-quiz slide-up">
+        <h2 class="section-title">Test Your Movie Knowledge</h2>
+        <div class="quiz-container glass-card">
+            <div class="quiz-intro active">
+                <h3>Movie Trivia Challenge</h3>
+                <p>Answer 5 questions to test your film knowledge and get personalized recommendations!</p>
+                <button id="start-quiz" class="glow-effect">Start Quiz</button>
+            </div>
+            <div class="quiz-questions">
+                <!-- Questions will be dynamically populated -->
+                <div class="quiz-question" data-question="1">
+                    <h3>Which director is known as the "Master of Suspense"?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-correct="true">Alfred Hitchcock</button>
+                        <button class="quiz-option">Steven Spielberg</button>
+                        <button class="quiz-option">Christopher Nolan</button>
+                        <button class="quiz-option">Martin Scorsese</button>
+                    </div>
+                </div>
+                <div class="quiz-question" data-question="2">
+                    <h3>Which film won the Oscar for Best Picture in 2020?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-option">1917</button>
+                        <button class="quiz-option">Joker</button>
+                        <button class="quiz-option" data-correct="true">Parasite</button>
+                        <button class="quiz-option">Once Upon a Time in Hollywood</button>
+                    </div>
+                </div>
+                <div class="quiz-question" data-question="3">
+                    <h3>Who played the lead role in "The Matrix"?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-correct="true">Keanu Reeves</button>
+                        <button class="quiz-option">Tom Cruise</button>
+                        <button class="quiz-option">Brad Pitt</button>
+                        <button class="quiz-option">Will Smith</button>
+                    </div>
+                </div>
+                <div class="quiz-question" data-question="4">
+                    <h3>Which of these is NOT a Marvel Cinematic Universe film?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-option">Black Panther</button>
+                        <button class="quiz-option">Doctor Strange</button>
+                        <button class="quiz-option" data-correct="true">The Dark Knight</button>
+                        <button class="quiz-option">Captain Marvel</button>
+                    </div>
+                </div>
+                <div class="quiz-question" data-question="5">
+                    <h3>Which actress has won the most Academy Awards?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-option">Meryl Streep</button>
+                        <button class="quiz-option" data-correct="true">Katharine Hepburn</button>
+                        <button class="quiz-option">Cate Blanchett</button>
+                        <button class="quiz-option">Julia Roberts</button>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-results">
+                <h3>Your Movie IQ: <span id="quiz-score">0</span>/5</h3>
+                <p>Based on your answers, we think you'd enjoy:</p>
+                <div class="quiz-recommendations">
+                    <!-- Will be dynamically populated -->
+                </div>
+                <button id="retake-quiz" class="glow-effect">Retake Quiz</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Content Rating Filter -->
+    <section class="content-filter slide-up">
+        <h2 class="section-title">Content Filters</h2>
+        <div class="filter-container glass-card">
+            <div class="filter-options">
+                <h3>Select Your Preferences</h3>
+                <div class="rating-filter">
+                    <h4>Content Rating</h4>
+                    <div class="rating-options">
+                        <label class="rating-option">
+                            <input type="checkbox" value="G" checked>
+                            <span class="rating-badge">G</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="checkbox" value="PG" checked>
+                            <span class="rating-badge">PG</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="checkbox" value="PG-13" checked>
+                            <span class="rating-badge">PG-13</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="checkbox" value="R">
+                            <span class="rating-badge">R</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="checkbox" value="TV-Y" checked>
+                            <span class="rating-badge">TV-Y</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="checkbox" value="TV-PG" checked>
+                            <span class="rating-badge">TV-PG</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="checkbox" value="TV-14" checked>
+                            <span class="rating-badge">TV-14</span>
+                        </label>
+                        <label class="rating-option">
+                            <input type="checkbox" value="TV-MA">
+                            <span class="rating-badge">TV-MA</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="score-filter">
+                    <h4>Minimum Rating</h4>
+                    <div class="score-slider">
+                        <input type="range" min="1" max="10" value="7" class="slider" id="score-slider">
+                        <div class="score-value"><span id="score-display">7.0</span>/10</div>
+                    </div>
+                </div>
+                <button id="apply-filters" class="glow-effect">Apply Filters</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Content -->
+    <section class="featured-showcase slide-up">
+        <h2 class="section-title">Featured Originals</h2>
+        <div class="featured-grid">
+            <div class="featured-item large">
+                <img src="https://image.tmdb.org/t/p/original/jXJxMcVoEuXzym3vFnjqDW4ifo6.jpg" alt="Stranger Things">
+                <div class="featured-overlay">
+                    <div class="featured-content">
+                        <div class="featured-badge">Original Series</div>
+                        <h3>Stranger Things</h3>
+                        <p>When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.</p>
+                        <div class="featured-meta">
+                            <span><i class="fas fa-star"></i> 8.7</span>
+                            <span><i class="fas fa-calendar"></i> 2016-Present</span>
+                        </div>
+                        <div class="featured-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch</button>
+                            <button class="trailer-btn"><i class="fas fa-film"></i> Trailer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="featured-item">
+                <img src="https://image.tmdb.org/t/p/w500/6POBWybSBDBKjSs1VAQcnQC1qyt.jpg" alt="Wednesday">
+                <div class="featured-overlay">
+                    <div class="featured-content">
+                        <div class="featured-badge">Original Series</div>
+                        <h3>Wednesday</h3>
+                        <p>Smart, sarcastic and a little dead inside, Wednesday Addams investigates a murder spree while making new friends — and foes — at Nevermore Academy.</p>
+                        <div class="featured-meta">
+                            <span><i class="fas fa-star"></i> 8.2</span>
+                            <span><i class="fas fa-calendar"></i> 2022</span>
+                        </div>
+                        <div class="featured-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch</button>
+                            <button class="trailer-btn"><i class="fas fa-film"></i> Trailer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="featured-item">
+                <img src="https://image.tmdb.org/t/p/w500/7vjaCdMw15FEbXyLQTVa04URsPm.jpg" alt="The Witcher">
+                <div class="featured-overlay">
+                    <div class="featured-content">
+                        <div class="featured-badge">Original Series</div>
+                        <h3>The Witcher</h3>
+                        <p>Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world where people often prove more wicked than beasts.</p>
+                        <div class="featured-meta">
+                            <span><i class="fas fa-star"></i> 8.1</span>
+                            <span><i class="fas fa-calendar"></i> 2019-Present</span>
+                        </div>
+                        <div class="featured-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch</button>
+                            <button class="trailer-btn"><i class="fas fa-film"></i> Trailer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="featured-item">
+                <img src="https://image.tmdb.org/t/p/w500/7tNTPZMb13W0AhkcuoL6myRrNRr.jpg" alt="Squid Game">
+                <div class="featured-overlay">
+                    <div class="featured-content">
+                        <div class="featured-badge">Original Series</div>
+                        <h3>Squid Game</h3>
+                        <p>Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits — with deadly high stakes.</p>
+                        <div class="featured-meta">
+                            <span><i class="fas fa-star"></i> 8.0</span>
+                            <span><i class="fas fa-calendar"></i> 2021</span>
+                        </div>
+                        <div class="featured-actions">
+                            <button class="watch-btn"><i class="fas fa-play"></i> Watch</button>
+                            <button class="trailer-btn"><i class="fas fa-film"></i> Trailer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon -->
+    <section class="coming-soon slide-up">
+        <h2 class="section-title">Coming Soon</h2>
+        <div class="countdown-container">
+            <div class="countdown-item glass-card">
+                <div class="countdown-image">
+                    <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="The Last Frontier">
+                    <div class="countdown-details">
+                        <span class="release-date">May 15, 2023</span>
+                        <h3>The Last Frontier</h3>
+                        <p>A space exploration mission goes wrong when the crew discovers they're not alone.</p>
+                        <div class="countdown-timer">
+                            <div class="timer-item">
+                                <span class="timer-value">15</span>
+                                <span class="timer-label">Days</span>
+                            </div>
+                            <div class="timer-item">
+                                <span class="timer-value">09</span>
+                                <span class="timer-label">Hours</span>
+                            </div>
+                            <div class="timer-item">
+                                <span class="timer-value">42</span>
+                                <span class="timer-label">Minutes</span>
+                            </div>
+                        </div>
+                        <button class="notify-btn glow-effect"><i class="fas fa-bell"></i> Notify Me</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer glass-card">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>CineView</h2>
+                <p>Your ultimate streaming destination</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="tvshows.html">TV Shows</a></li>
+                        <li><a href="mylist.html">My List</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Device Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Content Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#" class="glow-effect"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="glow-effect"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="glow-effect"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="glow-effect"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 CineView. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Global error handler for fetch requests
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('Unhandled promise rejection:', event.reason);
+            if (event.reason.name === 'TypeError' && event.reason.message.includes('Failed to fetch')) {
+                console.error('Network error occurred. Please check your internet connection.');
+            }
+        });
+    </script>
+    <!-- Sample Data for Offline Mode -->
+    <script src="src/data/sample-movies.js"></script>
+    
+    <!-- Local Data Service (Replaced TMDB API) -->
+    <script src="src/scripts/local-data-service.js"></script>
+    <script>
+        // Verify API service is loaded
+        if (typeof LocalDataService === 'undefined') {
+            console.error('LocalDataService failed to load');
+        } else {
+            console.log('LocalDataService loaded successfully');
+        }
+    </script>
+    <script src="src/scripts/user-manager.js"></script>
+    <script src="src/scripts/video-player.js"></script>
+    <script src="src/scripts/auth.js"></script>
+    <script src="src/scripts/profiles.js"></script>
+    <script src="src/scripts/main.js"></script>
+    <script src="src/js/slider.js"></script>
+    <script>
+        // Initialize content after all scripts are loaded
+        window.addEventListener('load', function() {
+            console.log('All resources loaded');
+            if (typeof initializeContent === 'function') {
+                console.log('Calling initializeContent');
+                initializeContent().catch(error => {
+                    console.error('Error in content initialization:', error);
+                });
+            } else {
+                console.error('initializeContent function not found');
+            }
+        });
+    </script>
+    
+    <!-- Simple initialization check -->
+    <script>
+        // Ensure the app initializes
+        setTimeout(function() {
+            if (typeof window.initTMDB === 'function' && 
+                document.querySelector('#trending-movies').children.length <= 1) {
+                console.log('Initializing app manually');
+                window.initTMDB();
+            }
+        }, 2000);
+    </script>
+    
+    <!-- Movie Details Modal -->
+    <div id="movieDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalMovieTitle"></h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <p id="modalDirector"></p>
+                    <p id="modalOverview"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Style for the new interactive components -->
+    <style>
+        /* Mood Selector Styles */
+        .mood-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .mood-card {
+            position: relative;
+            background: rgba(20, 20, 30, 0.7);
+            border-radius: 15px;
+            width: 180px;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .mood-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-color);
+        }
+
+        .mood-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .mood-card h3 {
+            margin: 0;
+            color: white;
+        }
+
+        .mood-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mood-card:hover .mood-overlay {
+            opacity: 1;
+        }
+
+        .select-mood-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .select-mood-btn:hover {
+            background: white;
+            color: var(--accent-color);
+        }
+
+        .mood-results {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .mood-results.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .mood-results-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        /* NEW STYLES FOR DISCOVER BY MOOD */
+        .discover-by-mood {
+            padding: 60px 5% 80px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(15, 15, 25, 0.8), rgba(25, 25, 35, 0.9));
+            margin-bottom: 20px;
+            border-radius: 0 0 50px 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .spotlight-text {
+            position: relative;
+            display: inline-block;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: white;
+            text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.5);
+        }
+
+        .spotlight-text::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+
+        .mood-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+            margin: 20px auto 50px;
+            max-width: 1200px;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--gradient-color) 0%, rgba(20, 20, 30, 0.8) 100%);
+            border: none;
+            height: 220px;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: left;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            z-index: 1;
+        }
+
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+            z-index: -1;
+        }
+
+        .gradient-bg:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .mood-icon-large {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .gradient-bg h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .gradient-bg p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.4;
+        }
+
+        .pulse-effect {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .mood-results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .current-mood {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .close-results {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-results:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .mood-results {
+            background: rgba(30, 30, 40, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-top: 40px;
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mood-results.active {
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .mood-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 15px;
+            }
+            
+            .gradient-bg {
+                height: 180px;
+                padding: 15px;
+            }
+            
+            .mood-icon-large {
+                width: 50px;
+                height: 50px;
+                font-size: 28px;
+            }
+            
+            .gradient-bg h3 {
+                font-size: 1.1rem;
+            }
+            
+            .gradient-bg p {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: white;
+        }
+
+        .quiz-intro, .quiz-questions, .quiz-results {
+            display: none;
+        }
+
+        .quiz-intro.active, .quiz-questions.active, .quiz-results.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .quiz-question {
+            display: none;
+        }
+
+        .quiz-question.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .quiz-option {
+            background: rgba(40, 40, 60, 0.8);
+            border: 2px solid var(--accent-color);
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: rgba(60, 60, 80, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .quiz-option.correct {
+            background: rgba(0, 200, 0, 0.2);
+            border-color: #00c800;
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(200, 0, 0, 0.2);
+            border-color: #c80000;
+        }
+
+        .quiz-recommendations {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+
+        /* Content Filter Styles */
+        .filter-container {
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: white;
+        }
+
+        .rating-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .rating-option {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .rating-option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .rating-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background: rgba(40, 40, 60, 0.8);
+            border: 2px solid #555;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .rating-option input:checked + .rating-badge {
+            background: var(--accent-color);
+            border-color: white;
+        }
+
+        .score-slider {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 70%;
+            height: 8px;
+            border-radius: 5px;
+            background: #555;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .score-value {
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hover Effects for Movie Cards */
+        .movie-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+            z-index: 10;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .movie-card .movie-poster::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.8) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .movie-card:hover .movie-poster::after {
+            opacity: 1;
+        }
+
+        .movie-card .watch-btn, .movie-card .info-btn {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            transition-delay: 0.1s;
+        }
+
+        .movie-card:hover .watch-btn, .movie-card:hover .info-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+
+    <!-- JavaScript for the interactive components -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mood Selector Logic
+            const moodCards = document.querySelectorAll('.mood-card');
+            const moodResults = document.querySelector('.mood-results');
+            const moodResultsContainer = document.querySelector('.mood-results-container');
+            
+            moodCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const mood = this.getAttribute('data-mood');
+                    // Simulate loading recommendations based on mood
+                    moodResultsContainer.innerHTML = '<div class="loading-spinner"></div>';
+                    moodResults.classList.add('active');
+                    
+                    // Simulate API call with timeout
+                    setTimeout(() => {
+                        let recommendations = [];
+                        
+                        switch(mood) {
+                            case 'happy':
+                                recommendations = ['Forrest Gump', 'La La Land', 'The Intouchables'];
+                                break;
+                            case 'romantic':
+                                recommendations = ['The Notebook', 'Pride & Prejudice', 'Before Sunrise'];
+                                break;
+                            case 'thrilling':
+                                recommendations = ['Inception', 'The Dark Knight', 'Die Hard'];
+                                break;
+                            case 'thoughtful':
+                                recommendations = ['Interstellar', 'The Shawshank Redemption', 'The Green Mile'];
+                                break;
+                            case 'nostalgic':
+                                recommendations = ['Back to the Future', 'The Goonies', 'E.T.'];
+                                break;
+                        }
+                        
+                        // Create HTML for recommendations
+                        const recommendationsHTML = recommendations.map(movie => {
+                            return `
+                                <div class="mood-recommendation movie-card">
+                                    <div class="movie-poster">
+                                        <img src="https://via.placeholder.com/150x225?text=${movie.replace(/\s/g, '+')}" alt="${movie}">
+                                    </div>
+                                    <div class="movie-details">
+                                        <h3>${movie}</h3>
+                                        <button class="watch-btn"><i class="fas fa-play"></i> Watch</button>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('');
+                        
+                        moodResultsContainer.innerHTML = recommendationsHTML;
+                    }, 1000);
+                });
+            });
+            
+            // Quiz Logic
+            const startQuizBtn = document.getElementById('start-quiz');
+            const retakeQuizBtn = document.getElementById('retake-quiz');
+            const quizIntro = document.querySelector('.quiz-intro');
+            const quizQuestions = document.querySelector('.quiz-questions');
+            const quizResults = document.querySelector('.quiz-results');
+            const quizScore = document.getElementById('quiz-score');
+            const allQuestions = document.querySelectorAll('.quiz-question');
+            
+            let currentQuestion = 1;
+            let score = 0;
+            
+            if (startQuizBtn) {
+                startQuizBtn.addEventListener('click', () => {
+                    quizIntro.classList.remove('active');
+                    quizQuestions.classList.add('active');
+                    showQuestion(currentQuestion);
+                });
+            }
+            
+            if (retakeQuizBtn) {
+                retakeQuizBtn.addEventListener('click', () => {
+                    score = 0;
+                    currentQuestion = 1;
+                    quizResults.classList.remove('active');
+                    quizQuestions.classList.add('active');
+                    
+                    // Reset options
+                    document.querySelectorAll('.quiz-option').forEach(opt => {
+                        opt.classList.remove('correct', 'incorrect');
+                        opt.disabled = false;
+                    });
+                    
+                    showQuestion(currentQuestion);
+                });
+            }
+            
+            function showQuestion(num) {
+                allQuestions.forEach(q => q.classList.remove('active'));
+                const questionToShow = document.querySelector(`.quiz-question[data-question="${num}"]`);
+                if (questionToShow) {
+                    questionToShow.classList.add('active');
+                    
+                    // Add click events to options
+                    const options = questionToShow.querySelectorAll('.quiz-option');
+                    options.forEach(opt => {
+                        opt.addEventListener('click', handleOptionClick);
+                    });
+                }
+            }
+            
+            function handleOptionClick() {
+                const options = this.parentElement.querySelectorAll('.quiz-option');
+                
+                // Disable all options after selection
+                options.forEach(opt => {
+                    opt.disabled = true;
+                    if (opt.getAttribute('data-correct') === 'true') {
+                        opt.classList.add('correct');
+                    }
+                });
+                
+                // Check if answer is correct
+                if (this.getAttribute('data-correct') === 'true') {
+                    score++;
+                } else {
+                    this.classList.add('incorrect');
+                }
+                
+                // Move to next question or show results
+                setTimeout(() => {
+                    if (currentQuestion < 5) {
+                        currentQuestion++;
+                        showQuestion(currentQuestion);
+                    } else {
+                        showResults();
+                    }
+                }, 1000);
+            }
+            
+            function showResults() {
+                quizQuestions.classList.remove('active');
+                quizResults.classList.add('active');
+                quizScore.textContent = score;
+                
+                // Generate recommendations based on score
+                const recommendations = document.querySelector('.quiz-recommendations');
+                
+                let suggestedMovies = [];
+                if (score >= 4) {
+                    suggestedMovies = ['The Godfather', 'Citizen Kane', '2001: A Space Odyssey'];
+                } else if (score >= 2) {
+                    suggestedMovies = ['The Avengers', 'The Matrix', 'Jurassic Park'];
+                } else {
+                    suggestedMovies = ['Finding Nemo', 'Toy Story', 'The Lion King'];
+                }
+                
+                const moviesHTML = suggestedMovies.map(movie => {
+                    return `
+                        <div class="movie-card">
+                            <div class="movie-poster">
+                                <img src="https://via.placeholder.com/120x180?text=${movie.replace(/\s/g, '+')}" alt="${movie}">
+                            </div>
+                            <div class="movie-details">
+                                <h3>${movie}</h3>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                recommendations.innerHTML = moviesHTML;
+            }
+            
+            // Content Filter Logic
+            const scoreSlider = document.getElementById('score-slider');
+            const scoreDisplay = document.getElementById('score-display');
+            const applyFiltersBtn = document.getElementById('apply-filters');
+            
+            if (scoreSlider) {
+                scoreSlider.addEventListener('input', () => {
+                    scoreDisplay.textContent = scoreSlider.value + '.0';
+                });
+            }
+            
+            if (applyFiltersBtn) {
+                applyFiltersBtn.addEventListener('click', () => {
+                    // Get selected ratings
+                    const selectedRatings = Array.from(document.querySelectorAll('.rating-option input:checked'))
+                        .map(input => input.value);
+                    
+                    // Get minimum score
+                    const minScore = scoreSlider.value;
+                    
+                    // Show notification that filters have been applied
+                    const notification = document.createElement('div');
+                    notification.className = 'notification';
+                    notification.innerHTML = `<i class="fas fa-check-circle"></i> Filters applied: ${selectedRatings.join(', ')} with rating ${minScore}+`;
+                    document.body.appendChild(notification);
+                    
+                    setTimeout(() => {
+                        notification.classList.add('show');
+                    }, 100);
+                    
+                    setTimeout(() => {
+                        notification.classList.remove('show');
+                        setTimeout(() => {
+                            notification.remove();
+                        }, 500);
+                    }, 3000);
+                    
+                    // Apply filters to content (in a real app, this would filter the actual content)
+                    console.log('Applying filters:', { ratings: selectedRatings, minScore });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

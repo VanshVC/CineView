@@ -1,0 +1,426 @@
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.modal.show-modal {
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    transform: translateY(30px);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    overflow: hidden;
+}
+
+.show-modal .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: var(--accent-color);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input, 
+.form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(var(--accent-color-rgb), 0.2);
+    outline: none;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--accent-color-hover);
+    transform: translateY(-2px);
+}
+
+.modal-footer {
+    padding: 0 1.5rem 1.5rem;
+    text-align: center;
+}
+
+.modal-footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: text-decoration 0.3s ease;
+}
+
+.modal-footer a:hover {
+    text-decoration: underline;
+}
+
+.form-error {
+    color: #f44336;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+/* Sign-up modal specific styles */
+#signupModal .modal-header {
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-color-secondary));
+    color: white;
+}
+
+/* Video Modal Styles */
+.video-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 200;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.video-modal.active {
+    display: flex;
+    animation: fadeIn 0.3s forwards;
+}
+
+.video-modal-content {
+    width: 90%;
+    max-width: 900px;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9);
+    opacity: 0;
+    animation: scaleIn 0.4s 0.1s forwards;
+}
+
+.video-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: var(--bg-color-darker);
+}
+
+.video-modal-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.video-modal-close {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.video-modal-close:hover {
+    color: var(--accent-color);
+}
+
+.video-container {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    width: 100%;
+    height: 0;
+    background-color: black;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.loading-spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--accent-color);
+    animation: spin 1s linear infinite;
+}
+
+/* Notification Styles */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--success-color, #4CAF50);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.notification.error {
+    background-color: var(--error-color, #f44336);
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { 
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Movie Details Modal Styles */
+#movieDetailsModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+#movieDetailsModal .modal-content {
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    animation: scaleIn 0.3s forwards;
+}
+
+#movieDetailsModal .modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-color-secondary));
+    color: white;
+}
+
+#movieDetailsModal .modal-header h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+#movieDetailsModal .close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#movieDetailsModal .close-modal:hover {
+    color: var(--accent-color-light, #ff9e80);
+}
+
+#movieDetailsModal .modal-body {
+    padding: 1.5rem;
+}
+
+#movieDetailsModal .modal-info p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+#movieDetailsModal #modalDirector {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+#movieDetailsModal #modalOverview {
+    font-size: 1rem;
+    color: var(--text-light);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .modal-content,
+    .video-modal-content,
+    #movieDetailsModal .modal-content {
+        width: 95%;
+    }
+    
+    .video-modal-header h3,
+    #movieDetailsModal .modal-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    #movieDetailsModal #modalDirector {
+        font-size: 1rem;
+    }
+}
+
+/* Video Player Modal */
+.video-player-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.video-player-modal.active {
+    opacity: 1;
+}
+
+.player-container {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    aspect-ratio: 16/9;
+    background-color: #000;
+}
+
+#player {
+    width: 100%;
+    height: 100%;
+}
+
+.close-player {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-player:hover {
+    color: #E50914;
+} 

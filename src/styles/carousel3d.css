@@ -1,0 +1,287 @@
+/* 3D Carousel Styles for Movies Page */
+
+.carousel3d-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    perspective: 1500px;
+    margin: 40px 0;
+    overflow: hidden;
+}
+
+.carousel3d-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+}
+
+.carousel3d {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+}
+
+.carousel3d-item {
+    position: absolute;
+    width: 320px;
+    height: 480px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform-style: preserve-3d;
+    transition: all 0.8s ease;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.carousel3d-item.active {
+    opacity: 1;
+    z-index: 10;
+}
+
+.carousel3d-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+    background: linear-gradient(to bottom, rgba(20, 20, 20, 0.8), rgba(10, 10, 10, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.carousel3d-item:hover .carousel3d-card {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+}
+
+.carousel3d-poster {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    overflow: hidden;
+}
+
+.carousel3d-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.carousel3d-item:hover .carousel3d-poster img {
+    transform: scale(1.1);
+}
+
+.carousel3d-rating {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffcc00;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.carousel3d-details {
+    position: relative;
+    padding: 15px;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.carousel3d-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.carousel3d-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.carousel3d-details p.desc {
+    font-size: 13px;
+    color: #ccc;
+    margin: 0 0 10px 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.carousel3d-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.carousel3d-buttons button {
+    flex: 1;
+    padding: 8px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel3d-buttons .watch-btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.carousel3d-buttons .info-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.carousel3d-buttons button i {
+    margin-right: 5px;
+}
+
+.carousel3d-buttons .watch-btn:hover {
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 42, 109, 0.4);
+}
+
+.carousel3d-buttons .info-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Controls */
+.carousel3d-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    z-index: 20;
+}
+
+.carousel3d-prev,
+.carousel3d-next {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.carousel3d-prev:hover,
+.carousel3d-next:hover {
+    background: rgba(255, 42, 109, 0.8);
+    transform: scale(1.1);
+    box-shadow: 0 5px 20px rgba(255, 42, 109, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .carousel3d-container {
+        height: 500px;
+    }
+    
+    .carousel3d-item {
+        width: 280px;
+        height: 420px;
+    }
+    
+    .carousel3d-details h3 {
+        font-size: 16px;
+    }
+    
+    .carousel3d-meta {
+        font-size: 12px;
+    }
+    
+    .carousel3d-details p.desc {
+        font-size: 12px;
+    }
+    
+    .carousel3d-buttons button {
+        font-size: 12px;
+        padding: 6px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel3d-container {
+        height: 450px;
+    }
+    
+    .carousel3d-item {
+        width: 240px;
+        height: 360px;
+    }
+    
+    .carousel3d-controls {
+        bottom: 10px;
+    }
+    
+    .carousel3d-prev,
+    .carousel3d-next {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
+/* Animation for card entrance */
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.carousel3d-item {
+    animation: cardEntrance 0.8s ease forwards;
+    animation-delay: calc(var(--index) * 0.1s);
+}
+
+/* Glow effect for active card */
+.carousel3d-item.active .carousel3d-card {
+    box-shadow: 0 0 30px rgba(255, 42, 109, 0.5);
+    border: 1px solid rgba(255, 42, 109, 0.3);
+}

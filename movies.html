@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies - CineView</title>
+    <link rel="stylesheet" href="src/styles/theme-reset.css">
+    <link rel="stylesheet" href="src/styles/theme.css">
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/modal.css">
+    <link rel="stylesheet" href="src/styles/movies.css">
+    <link rel="stylesheet" href="src/styles/auth.css">
+    <link rel="stylesheet" href="src/styles/omdb-integration.css">
+    <link rel="stylesheet" href="src/styles/horizontal-slider.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Diagnostic script to catch errors -->
+    <script>
+    window.addEventListener('error', function(e) {
+        console.error('Global error:', e.message, 'at', e.filename, ':', e.lineno);
+    });
+    
+    window.addEventListener('unhandledrejection', function(e) {
+        console.error('Unhandled Promise Rejection:', e.reason);
+    });
+    </script>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>CineView</h1>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html" class="active">Movies</a></li>
+                    <li><a href="tvshows.html">TV Shows</a></li>
+                    <li><a href="mylist.html">My List</a></li>
+                    <li><a href="search.html">Search</a></li>
+                </ul>
+            </div>
+            <div class="nav-buttons">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+                <button class="login-btn" id="loginBtn">Log In</button>
+                <button class="signup-btn" id="signupBtn">Sign Up</button>
+            </div>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </nav>
+    </header>
+
+    <!-- Search Container -->
+    <div class="search-container" id="searchContainer">
+        <form class="search-form">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search for movies, TV shows...">
+            <button type="submit" class="search-submit"><i class="fas fa-search"></i></button>
+        </form>
+        <div class="search-results" id="searchResults">
+            <!-- Search results will be populated here -->
+        </div>
+    </div>
+
+    <!-- Featured Movie Carousel -->
+    <section class="featured-content">
+        <div class="carousel-container">
+            <div class="carousel-nav">
+                <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="carousel-slider">
+                <div class="carousel-slide active">
+                    <div class="featured-backdrop" style="background-image: url('https://image.tmdb.org/t/p/original/qhb1qOilapbapxWQn9jtRCL7QzX.jpg')">
+                        <div class="featured-content-details">
+                            <span class="featured-badge">Featured</span>
+                            <h3>The Last Action</h3>
+                            <div class="featured-meta">
+                                <span><i class="fas fa-film"></i> Action</span>
+                                <span><i class="fas fa-star"></i> 8.5</span>
+                                <span><i class="fas fa-clock"></i> 2h 15m</span>
+                            </div>
+                            <p>An ex-hitman comes out of retirement to track down the gangsters who killed his dog and took his car.</p>
+                            <div class="featured-buttons">
+                                <button class="play-btn"><i class="fas fa-play"></i> Play</button>
+                                <button class="info-btn"><i class="fas fa-info-circle"></i> More Info</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="featured-backdrop" style="background-image: url('https://image.tmdb.org/t/p/original/8kOWDBK6XlPUzckuHJbxXdnbfrD.jpg')">
+                        <div class="featured-content-details">
+                            <span class="featured-badge">Top Rated</span>
+                            <h3>Comedy Night</h3>
+                            <div class="featured-meta">
+                                <span><i class="fas fa-film"></i> Comedy</span>
+                                <span><i class="fas fa-star"></i> 7.9</span>
+                                <span><i class="fas fa-clock"></i> 1h 48m</span>
+                            </div>
+                            <p>A hilarious adventure of friends who find themselves in unexpected situations that will leave you laughing.</p>
+                            <div class="featured-buttons">
+                                <button class="play-btn"><i class="fas fa-play"></i> Play</button>
+                                <button class="info-btn"><i class="fas fa-info-circle"></i> More Info</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="featured-backdrop" style="background-image: url('https://image.tmdb.org/t/p/original/sJiHVM0A3OXDVxl4Z6a7ihMPHfm.jpg')">
+                        <div class="featured-content-details">
+                            <span class="featured-badge">New Release</span>
+                            <h3>Galactic Voyage</h3>
+                            <div class="featured-meta">
+                                <span><i class="fas fa-film"></i> Sci-Fi</span>
+                                <span><i class="fas fa-star"></i> 8.7</span>
+                                <span><i class="fas fa-clock"></i> 2h 32m</span>
+                            </div>
+                            <p>Astronauts venture into the unknown reaches of space, facing extraterrestrial challenges and discovering the mysteries of the universe.</p>
+                            <div class="featured-buttons">
+                                <button class="play-btn"><i class="fas fa-play"></i> Play</button>
+                                <button class="info-btn"><i class="fas fa-info-circle"></i> More Info</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <span class="indicator active" data-slide="0"></span>
+                    <span class="indicator" data-slide="1"></span>
+                    <span class="indicator" data-slide="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Genre Filters -->
+    <section class="genre-filters">
+        <h2>Browse by Genre</h2>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="action">Action</button>
+            <button class="filter-btn" data-filter="comedy">Comedy</button>
+            <button class="filter-btn" data-filter="drama">Drama</button>
+            <button class="filter-btn" data-filter="sci-fi">Sci-Fi</button>
+            <button class="filter-btn" data-filter="horror">Horror</button>
+        </div>
+    </section>
+
+    <!-- Popular Movies -->
+    <section class="trending">
+        <h2>Popular Movies</h2>
+        <div class="slider-container">
+            <div class="slider-wrapper">
+                <div class="horizontal-slider">
+                    <!-- Movie 1 -->
+                    <div class="slider-card" data-genre="action">
+                        <div class="slider-card-inner">
+                            <div class="slider-poster">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_.jpg" alt="John Wick">
+                                <div class="slider-rating"><i class="fas fa-star"></i> 8.5</div>
+                                <div class="slider-overlay">
+                                    <div class="slider-buttons">
+                                        <button class="watch-btn"><i class="fas fa-play"></i> Watch</button>
+                                        <button class="info-btn" data-director="Chad Stahelski" data-overview="An ex-hitman comes out of retirement to track down the gangsters who killed his dog and took his car."><i class="fas fa-info-circle"></i> Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slider-details">
+                                <h3>The Last Action</h3>
+                                <div class="slider-meta">
+                                    <span class="year">2023</span>
+                                    <span class="genre">Action</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Movie 2 -->
+                    <div class="slider-card" data-genre="comedy">
+                        <div class="slider-card-inner">
+                            <div class="slider-poster">
+                                <img src="https://m.media-amazon.com/images/M/MV5BOTY2NzFjODctOWUzMC00MGZhLTlhNjMtM2Y2ODBiNGY1ZWRiXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg" alt="Free Guy">
+                                <div class="slider-rating"><i class="fas fa-star"></i> 7.9</div>
+                                <div class="slider-overlay">
+                                    <div class="slider-buttons">
+                                        <button class="watch-btn"><i class="fas fa-play"></i> Watch</button>
+                                        <button class="info-btn" data-director="Shawn Levy" data-overview="A hilarious adventure of friends who find themselves in unexpected situations that will leave you laughing."><i class="fas fa-info-circle"></i> Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slider-details">
+                                <h3>Comedy Night</h3>
+                                <div class="slider-meta">
+                                    <span class="year">2023</span>
+                                    <span class="genre">Comedy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Movie 3 -->
+                    <div class="slider-card" data-genre="drama">
+                        <div class="slider-card-inner">
+                            <div class="slider-poster">
+                                <img src="https://m.media-amazon.com/images/M/MV5BNmE5ZmE3OGItNTdlNC00YmMxLWEzNjctYzAwOGQ5ODg0OTI0XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg" alt="A Star Is Born">
+                                <div class="slider-rating"><i class="fas fa-star"></i> 9.1</div>
+                                <div class="slider-overlay">
+                                    <div class="slider-buttons">
+                                        <button class="watch-btn"><i class="fas fa-play"></i> Watch</button>
+                                        <button class="info-btn" data-director="Bradley Cooper" data-overview="An emotional story about family, love, and the meaning of life that will touch your heart."><i class="fas fa-info-circle"></i> Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slider-details">
+                                <h3>Life's Journey</h3>
+                                <div class="slider-meta">
+                                    <span class="year">2022</span>
+                                    <span class="genre">Drama</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Movie 4 -->
+                    <div class="slider-card" data-genre="sci-fi">
+                        <div class="slider-card-inner">
+                            <div class="slider-poster">
+                                <img src="https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg" alt="Interstellar">
+                                <div class="slider-rating"><i class="fas fa-star"></i> 8.7</div>
+                                <div class="slider-overlay">
+                                    <div class="slider-buttons">
+                                        <button class="watch-btn"><i class="fas fa-play"></i> Watch</button>
+                                        <button class="info-btn" data-director="Christopher Nolan" data-overview="Astronauts venture into the unknown reaches of space, facing extraterrestrial challenges and discovering the mysteries of the universe."><i class="fas fa-info-circle"></i> Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slider-details">
+                                <h3>Galactic Voyage</h3>
+                                <div class="slider-meta">
+                                    <span class="year">2023</span>
+                                    <span class="genre">Sci-Fi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Movie 5 -->
+                    <div class="slider-card" data-genre="horror">
+                        <div class="slider-card-inner">
+                            <div class="slider-poster">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMTM3NjA1NDMyMV5BMl5BanBnXkFtZTcwMDQzNDMzOQ@@._V1_.jpg" alt="The Conjuring">
+                                <div class="slider-rating"><i class="fas fa-star"></i> 7.8</div>
+                                <div class="slider-overlay">
+                                    <div class="slider-buttons">
+                                        <button class="watch-btn"><i class="fas fa-play"></i> Watch</button>
+                                        <button class="info-btn" data-director="James Wan" data-overview="A family moves into a haunted house unaware of its terrifying history, unleashing supernatural forces."><i class="fas fa-info-circle"></i> Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slider-details">
+                                <h3>The Haunting</h3>
+                                <div class="slider-meta">
+                                    <span class="year">2022</span>
+                                    <span class="genre">Horror</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Movie 6 -->
+                    <div class="slider-card" data-genre="action">
+                        <div class="slider-card-inner">
+                            <div class="slider-poster">
+                                <img src="https://m.media-amazon.com/images/M/MV5BMTYxMzYwODE4OV5BMl5BanBnXkFtZTgwNDE5MzE2MDE@._V1_.jpg" alt="Fast & Furious">
+                                <div class="slider-rating"><i class="fas fa-star"></i> 8.3</div>
+                                <div class="slider-overlay">
+                                    <div class="slider-buttons">
+                                        <button class="watch-btn"><i class="fas fa-play"></i> Watch</button>
+                                        <button class="info-btn" data-director="Justin Lin" data-overview="A high-octane thriller about a cop chasing a criminal through the city in a series of intense car chases."><i class="fas fa-info-circle"></i> Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slider-details">
+                                <h3>Speed Chase</h3>
+                                <div class="slider-meta">
+                                    <span class="year">2023</span>
+                                    <span class="genre">Action</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="slider-pagination">
+                <span class="slider-dot active"></span>
+                <span class="slider-dot"></span>
+                <span class="slider-dot"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Award Winning Films -->
+    <section class="grid-showcase slide-up">
+        <h2 class="section-title">Award Winning Films</h2>
+        <div class="grid-container">
+            <div class="grid-item featured glass-card hover-scale" style="--delay: 0.1s;">
+                <img src="https://m.media-amazon.com/images/M/MV5BYjIzMTllZDAtNzJlZC00MTI1LWFkZTItZmY2NjRhOTVlOWYxXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg" alt="Best Picture">
+                <div class="grid-overlay">
+                    <div class="award-badge">Best Picture 2020</div>
+                    <h3>Parasite</h3>
+                    <p>Bong Joon-ho's masterpiece about class struggle became the first non-English language film to win Best Picture at the Academy Awards.</p>
+                    <button class="grid-watch-btn glow-effect"><i class="fas fa-play"></i> Watch Now</button>
+                </div>
+            </div>
+            <div class="grid-item glass-card hover-scale" style="--delay: 0.2s;">
+                <img src="https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg" alt="Best Director">
+                <div class="grid-overlay">
+                    <div class="award-badge">Best Director 2020</div>
+                    <h3>Joker</h3>
+                    <p>Todd Phillips' psychological thriller earned Joaquin Phoenix an Oscar for Best Actor for his portrayal of the iconic villain.</p>
+                    <button class="grid-watch-btn glow-effect"><i class="fas fa-play"></i> Watch Now</button>
+                </div>
+            </div>
+            <div class="grid-item glass-card hover-scale" style="--delay: 0.3s;">
+                <img src="https://m.media-amazon.com/images/M/MV5BYTdiOTIyZTQtNmQ1OS00NjZlLWIyMTgtYzk5Y2M3ZWRiZjY1XkEyXkFqcGdeQXVyMTAzMDg4NzU0._V1_.jpg" alt="Best Picture">
+                <div class="grid-overlay">
+                    <div class="award-badge">Best Picture 2022</div>
+                    <h3>CODA</h3>
+                    <p>A heartwarming story about the only hearing member of a deaf family that won Best Picture, Adapted Screenplay, and Supporting Actor.</p>
+                    <button class="grid-watch-btn glow-effect"><i class="fas fa-play"></i> Watch Now</button>
+                </div>
+            </div>
+            <div class="grid-item glass-card hover-scale" style="--delay: 0.4s;">
+                <img src="https://m.media-amazon.com/images/M/MV5BYTExZTdhY2ItNGQ1YS00NjJlLWIxMjYtZTI1MzNlMzY0OTk4XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" alt="Best Picture">
+                <div class="grid-overlay">
+                    <div class="award-badge">Best Picture 1995</div>
+                    <h3>Forrest Gump</h3>
+                    <p>Robert Zemeckis' classic won six Academy Awards including Best Picture, Director, and Actor for Tom Hanks.</p>
+                    <button class="grid-watch-btn glow-effect"><i class="fas fa-play"></i> Watch Now</button>
+                </div>
+            </div>
+            <div class="grid-item glass-card hover-scale" style="--delay: 0.5s;">
+                <img src="https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" alt="Best Picture">
+                <div class="grid-overlay">
+                    <div class="award-badge">Best Picture 1973</div>
+                    <h3>The Godfather</h3>
+                    <p>Francis Ford Coppola's crime epic is considered one of the greatest films of all time, winning three Academy Awards including Best Picture.</p>
+                    <button class="grid-watch-btn glow-effect"><i class="fas fa-play"></i> Watch Now</button>
+                </div>
+            </div>
+            <div class="grid-item glass-card hover-scale" style="--delay: 0.6s;">
+                <img src="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" alt="Best Picture">
+                <div class="grid-overlay">
+                    <div class="award-badge">Best Picture 1943</div>
+                    <h3>Casablanca</h3>
+                    <p>This timeless romantic drama won three Academy Awards including Best Picture and is consistently ranked among the greatest films ever made.</p>
+                    <button class="grid-watch-btn glow-effect"><i class="fas fa-play"></i> Watch Now</button>
+                </div>
+            </div>
+            <div class="grid-item glass-card hover-scale" style="--delay: 0.7s;">
+                <img src="https://m.media-amazon.com/images/M/MV5BOTA5NDZlZGUtMjAxOS00YTRkLTkwYmMtYWQ0NWEwZDZiNjEzXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg" alt="Best Picture">
+                <div class="grid-overlay">
+                    <div class="award-badge">Best Picture 2017</div>
+                    <h3>Moonlight</h3>
+                    <p>Barry Jenkins' coming-of-age drama made history as the first film with an all-Black cast and LGBTQ+ themes to win Best Picture.</p>
+                    <button class="grid-watch-btn glow-effect"><i class="fas fa-play"></i> Watch Now</button>
+                </div>
+            </div>
+            <div class="grid-item glass-card hover-scale" style="--delay: 0.8s;">
+                <img src="https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg" alt="Best Visual Effects">
+                <div class="grid-overlay">
+                    <div class="award-badge">Best Visual Effects 1999</div>
+                    <h3>The Matrix</h3>
+                    <p>The Wachowskis' groundbreaking sci-fi film won four Academy Awards and revolutionized visual effects in cinema.</p>
+                    <button class="grid-watch-btn glow-effect"><i class="fas fa-play"></i> Watch Now</button>
+                </div>
+            </div>
+            <div class="grid-item glass-card hover-scale" style="--delay: 0.9s;">
+                <img src="https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" alt="Best Picture">
+                <div class="grid-overlay">
+                    <div class="award-badge">Best Picture 2004</div>
+                    <h3>The Lord of the Rings: The Return of the King</h3>
+                    <p>Peter Jackson's epic conclusion to the trilogy made history by winning all 11 Academy Awards it was nominated for.</p>
+                    <button class="grid-watch-btn glow-effect"><i class="fas fa-play"></i> Watch Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Timeline -->
+    <section class="timeline-section">
+        <h2>Coming Soon</h2>
+        <div class="timeline-container">
+            <div class="timeline-controls">
+                <button class="timeline-prev"><i class="fas fa-arrow-left"></i></button>
+                <button class="timeline-next"><i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">May 24, 2024</div>
+                    <div class="timeline-content">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNzQ5Y2Y5NjQtZDRiMS00MjdmLTkzMzQtOGM2MTJmOThhYWU5XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg" alt="Furiosa">
+                        <h3>Furiosa: A Mad Max Saga</h3>
+                        <p>The origin story of renegade warrior Furiosa before she teamed up with Mad Max. Starring Anya Taylor-Joy and Chris Hemsworth.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">June 14, 2024</div>
+                    <div class="timeline-content">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZTgwYmQxZjgtMDNiYi00YmE1LTk3ZjEtMjU0MzE5ZmNjODZiXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg" alt="Inside Out 2">
+                        <h3>Inside Out 2</h3>
+                        <p>Pixar's sequel follows Riley as a teenager with new emotions joining her emotional headquarters, including Anxiety, Envy, and Embarrassment.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">July 5, 2024</div>
+                    <div class="timeline-content">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNDJkNzQzODQtM2Q0MC00MWE4LTlkMjMtNWZmZWQyMTYwZGRmXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg" alt="Despicable Me 4">
+                        <h3>Despicable Me 4</h3>
+                        <p>Gru and his family return for another adventure with the Minions. Steve Carell, Kristen Wiig, and Will Ferrell lead the voice cast.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">July 26, 2024</div>
+                    <div class="timeline-content">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNDJhYTk2MTctZmVlOS00ZGI5LWFhYzAtNWY1ZjJjYTU5ZTlmXkEyXkFqcGdeQXVyMTAxNzQ1NzI@._V1_.jpg" alt="Deadpool & Wolverine">
+                        <h3>Deadpool & Wolverine</h3>
+                        <p>Ryan Reynolds and Hugh Jackman team up in this highly anticipated Marvel film that brings Deadpool into the MCU alongside Wolverine.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">August 9, 2024</div>
+                    <div class="timeline-content">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNzZmOTU1ZTEtYzVhNi00NzQxLWI5ZjAtNWNhNjEwY2E3YmZjXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg" alt="Borderlands">
+                        <h3>Borderlands</h3>
+                        <p>Based on the popular video game, this sci-fi action film stars Cate Blanchett, Kevin Hart, and Jamie Lee Curtis in a story about treasure hunters on an alien planet.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">September 27, 2024</div>
+                    <div class="timeline-content">
+                        <img src="https://m.media-amazon.com/images/M/MV5BYmY4ZGUwMjQtYjY1Zi00YTRhLWFkYTQtZDVhY2MyZjBkZDQ0XkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_.jpg" alt="Joker: Folie à Deux">
+                        <h3>Joker: Folie à Deux</h3>
+                        <p>Joaquin Phoenix returns as Arthur Fleck alongside Lady Gaga in this musical sequel to the Oscar-winning 2019 film.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">November 8, 2024</div>
+                    <div class="timeline-content">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNzJlM2NmZTItOGQyYS00MmE2LTkwZGUtNDFkNmJmZjRjZjcxXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_.jpg" alt="Gladiator II">
+                        <h3>Gladiator II</h3>
+                        <p>Ridley Scott's sequel to his 2000 epic stars Paul Mescal, Denzel Washington, and Pedro Pascal in a new chapter of the Roman Empire saga.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">December 20, 2024</div>
+                    <div class="timeline-content">
+                        <img src="https://m.media-amazon.com/images/M/MV5BYjZkOGZiNTQtZGIzZi00YjYxLWE0MWMtMmY3MzU5YzY5NmIyXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg" alt="Avatar 3">
+                        <h3>Avatar 3</h3>
+                        <p>James Cameron's third installment in the Avatar series continues the saga of Pandora with returning stars Sam Worthington and Zoe Saldana.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login to CineView</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+                    <div class="form-group remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    <div class="form-error" id="loginError"></div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <div class="modal-footer">
+                    <p>Don't have an account? <a href="#" id="switchToSignup">Sign up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create an Account</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" placeholder="Enter your password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupConfirmPassword">Confirm Password</label>
+                        <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required>
+                    </div>
+                    <div class="form-error" id="signupError"></div>
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </form>
+                <div class="modal-footer">
+                    <p>Already have an account? <a href="#" id="switchToLogin">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <span id="notificationMessage"></span>
+        <span class="notification-close">&times;</span>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <span class="close-video-btn" id="closeVideoBtn">&times;</span>
+            <div class="video-player-header">
+                <h3 id="videoTitle">Video Title</h3>
+                <div class="video-meta">
+                    <span id="videoYear">2023</span>
+                    <span id="videoRating"><i class="fas fa-star"></i> 8.5</span>
+                </div>
+            </div>
+            <div class="video-player-wrapper">
+                <div class="video-loading" id="videoLoading">
+                    <div class="video-spinner"></div>
+                </div>
+                <video id="videoPlayer" controls>
+                    <source src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video-info">
+                <div class="video-actions">
+                    <button class="video-action-btn primary"><i class="fas fa-plus"></i> Add to My List</button>
+                    <button class="video-action-btn"><i class="fas fa-thumbs-up"></i> Like</button>
+                    <button class="video-action-btn"><i class="fas fa-share"></i> Share</button>
+                    <button class="video-action-btn"><i class="fas fa-download"></i> Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer glass-card">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>CineView</h2>
+                <p>Your ultimate streaming destination</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="tvshows.html">TV Shows</a></li>
+                        <li><a href="mylist.html">My List</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Device Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Content Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#" class="glow-effect"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="glow-effect"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="glow-effect"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="glow-effect"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 CineView. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Movie Details Modal -->
+    <div id="movieDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalMovieTitle"></h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <p id="modalDirector"></p>
+                    <p id="modalOverview"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sample Data for Offline Mode -->
+    <script src="src/data/sample-movies.js"></script>
+    
+    <!-- Local Data Service (Replaced TMDB API) -->
+    <script src="src/scripts/local-data-service.js"></script>
+    <script src="src/scripts/main.js"></script>
+    <script src="src/scripts/sliders.js"></script>
+    <script src="src/scripts/movies.js"></script>
+    <script src="src/scripts/video-player.js"></script>
+    <script src="src/scripts/theme.js"></script>
+    <script src="src/scripts/auth.js"></script>
+    
+    <!-- Horizontal Slider -->
+    <script src="src/js/horizontal-slider.js"></script>
+
+    <!-- JavaScript -->
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+    
+    <!-- OMDB API Integration -->
+    <script type="module" src="src/js/movies-omdb.js"></script>
+    
+
+</body>
+</html>

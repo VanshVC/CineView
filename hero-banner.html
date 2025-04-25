@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineVerse - Banner Hero Example</title>
+    <link rel="stylesheet" href="src/styles/theme-reset.css">
+    <link rel="stylesheet" href="src/styles/theme.css">
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/banner-hero.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>CineVerse</h1>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="tvshows.html">TV Shows</a></li>
+                    <li><a href="mylist.html">My List</a></li>
+                    <li><a href="search.html">Search</a></li>
+                </ul>
+            </div>
+            <div class="nav-buttons">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+                <button class="login-btn">Log In</button>
+                <button class="signup-btn">Sign Up</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner Hero Section -->
+    <section class="banner-hero">
+        <div class="banner-image">
+            <!-- Using a high-quality cinematic background image -->
+            <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1950&q=80" alt="Cinematic Background">
+            <div class="banner-overlay"></div>
+        </div>
+        <div class="banner-content">
+            <div class="banner-left">
+                <span class="banner-badge">New Releases</span>
+                <h1>Discover <span class="highlight">Award-Winning</span> Movies & Shows</h1>
+                <p>Immerse yourself in a cinematic experience like never before with our curated collection of blockbusters and critically acclaimed content.</p>
+                <div class="banner-buttons">
+                    <button class="btn-primary"><i class="fas fa-play"></i> Start Watching</button>
+                    <button class="btn-outline"><i class="fas fa-plus"></i> Add to Watchlist</button>
+                </div>
+            </div>
+            <div class="banner-right">
+                <div class="featured-card">
+                    <div class="featured-poster">
+                        <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Featured Film">
+                        <div class="featured-badge">Trending</div>
+                    </div>
+                    <div class="featured-info">
+                        <h3>The Last Chapter</h3>
+                        <div class="featured-meta">
+                            <span><i class="fas fa-star"></i> 9.2</span>
+                            <span><i class="fas fa-clock"></i> 2h 15m</span>
+                        </div>
+                        <button class="watch-trailer-btn"><i class="fas fa-play-circle"></i> Watch Trailer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Teaser -->
+    <section class="content-teaser">
+        <div class="teaser-container">
+            <h2>Why Choose CineVerse?</h2>
+            <div class="teaser-grid">
+                <div class="teaser-card">
+                    <i class="fas fa-film"></i>
+                    <h3>4K Ultra HD</h3>
+                    <p>Experience crystal clear visuals with our 4K streaming quality.</p>
+                    <button class="watch-btn"><i class="fas fa-play"></i> Watch Demo</button>
+                </div>
+                <div class="teaser-card">
+                    <i class="fas fa-download"></i>
+                    <h3>Offline Viewing</h3>
+                    <p>Download your favorite content and watch it anywhere, anytime.</p>
+                    <button class="watch-btn"><i class="fas fa-play"></i> Watch Demo</button>
+                </div>
+                <div class="teaser-card">
+                    <i class="fas fa-globe"></i>
+                    <h3>Global Content</h3>
+                    <p>Access international movies and shows from around the world.</p>
+                    <button class="watch-btn"><i class="fas fa-play"></i> Watch Demo</button>
+                </div>
+                <div class="teaser-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Multiple Profiles</h3>
+                    <p>Create up to 5 profiles for friends and family members.</p>
+                    <button class="watch-btn"><i class="fas fa-play"></i> Watch Demo</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section (minimal for example) -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>CineVerse</h2>
+                <p>The ultimate streaming experience</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 CineVerse. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Video Player Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <span class="close-video-btn" id="closeVideoBtn">&times;</span>
+            <div class="video-player-header">
+                <h3 id="videoTitle">Video Title</h3>
+                <div class="video-meta">
+                    <span id="videoYear">2023</span>
+                    <span id="videoRating"><i class="fas fa-star"></i> 8.5</span>
+                </div>
+            </div>
+            <div class="video-player-wrapper">
+                <div class="video-loading" id="videoLoading">
+                    <div class="video-spinner"></div>
+                </div>
+                <video id="videoPlayer" controls>
+                    <source src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video-info">
+                <div class="video-actions">
+                    <button class="video-action-btn primary"><i class="fas fa-plus"></i> Add to My List</button>
+                    <button class="video-action-btn"><i class="fas fa-thumbs-up"></i> Like</button>
+                    <button class="video-action-btn"><i class="fas fa-share"></i> Share</button>
+                    <button class="video-action-btn"><i class="fas fa-download"></i> Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/scripts/app.js"></script>
+    <script src="src/scripts/video-player.js"></script>
+</body>
+</html> 

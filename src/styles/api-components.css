@@ -1,0 +1,208 @@
+/* Styles for API-related components */
+
+/* Error Message */
+.error-message {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(45deg, #ff3366, #ff5566);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 5px 20px rgba(255, 51, 102, 0.4);
+    z-index: 9999;
+    animation: slideUp 0.3s ease-out forwards;
+    text-align: center;
+    max-width: 90%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.error-message i {
+    font-size: 1.5rem;
+}
+
+.error-message .close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.error-message .close-btn:hover {
+    opacity: 1;
+}
+
+@keyframes slideUp {
+    from { transform: translate(-50%, 100px); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+/* Retry Button */
+.retry-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.retry-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.retry-button:active {
+    transform: translateY(0);
+}
+
+/* Notification */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius-md);
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    animation: slideInRight 0.3s ease-out forwards;
+    max-width: 90%;
+}
+
+.info-notification {
+    background: linear-gradient(45deg, #2196F3, #03A9F4);
+}
+
+.success-notification {
+    background: linear-gradient(45deg, #4CAF50, #8BC34A);
+}
+
+.notification i {
+    font-size: 1.25rem;
+}
+
+.notification .close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: auto;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.notification .close-btn:hover {
+    opacity: 1;
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Movie Card Enhancements */
+.movie-meta {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.rating i {
+    color: #ffcc00;
+}
+
+.movie-overview {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.watch-btn {
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.watch-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(123, 44, 191, 0.3);
+}
+
+/* Empty State */
+.empty-state {
+    width: 100%;
+    min-height: 200px;
+    padding: 3rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-lg);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    animation: pulse 2s infinite;
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 80%;
+    margin: 0 auto;
+}

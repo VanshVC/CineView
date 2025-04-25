@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - CineView</title>
+    <link rel="stylesheet" href="src/styles/theme-reset.css">
+    <link rel="stylesheet" href="src/styles/theme.css">
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/modal.css">
+    <link rel="stylesheet" href="src/styles/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Diagnostic script to catch errors -->
+    <script>
+    window.addEventListener('error', function(e) {
+        console.error('Global error:', e.message, 'at', e.filename, ':', e.lineno);
+    });
+    
+    window.addEventListener('unhandledrejection', function(e) {
+        console.error('Unhandled Promise Rejection:', e.reason);
+    });
+    </script>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>CineView</h1>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="tvshows.html">TV Shows</a></li>
+                    <li><a href="mylist.html">My List</a></li>
+                    <li><a href="search.html" class="active">Search</a></li>
+                </ul>
+            </div>
+            <div class="nav-buttons">
+                <button class="search-btn active-search"><i class="fas fa-search"></i></button>
+                <button class="login-btn" id="loginBtn">Log In</button>
+                <button class="signup-btn" id="signupBtn">Sign Up</button>
+            </div>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </nav>
+    </header>
+
+    <!-- Main Search Section -->
+    <section class="main-search">
+        <div class="search-header">
+            <h1>Find Movies & TV Shows</h1>
+            <p>Search through our extensive library of content</p>
+        </div>
+        <div class="search-bar">
+            <form id="mainSearchForm">
+                <input type="text" id="mainSearchInput" placeholder="Search for movies, TV shows, actors...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+        
+        <!-- Filter Options -->
+        <div class="filter-options">
+            <div class="filter-group">
+                <label>Type:</label>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="movie">Movies</button>
+                    <button class="filter-btn" data-filter="tvshow">TV Shows</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label>Genre:</label>
+                <select id="genreFilter">
+                    <option value="all">All Genres</option>
+                    <option value="action">Action</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="drama">Drama</option>
+                    <option value="sci-fi">Sci-Fi</option>
+                    <option value="horror">Horror</option>
+                    <option value="thriller">Thriller</option>
+                    <option value="fantasy">Fantasy</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Year:</label>
+                <select id="yearFilter">
+                    <option value="all">All Years</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="older">2019 & Older</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Results -->
+    <section class="search-results-section">
+        <h2>Search Results</h2>
+        <div id="searchResultsCount" class="results-count">
+            <!-- Will be populated by JavaScript -->
+        </div>
+        <div id="searchResultsGrid" class="content-grid">
+            <!-- Will be populated by JavaScript -->
+        </div>
+        
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state">
+            <i class="fas fa-search"></i>
+            <h3>Start Your Search</h3>
+            <p>Enter keywords above to find your favorite movies and shows</p>
+        </div>
+        
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-state">
+            <div class="spinner"></div>
+            <p>Searching for content...</p>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-btn" id="loginCloseBtn">&times;</span>
+            <h2>Log In to CineView</h2>
+            <p>Welcome back to your entertainment journey.</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                <button type="submit" class="submit-btn">Log In</button>
+            </form>
+            <div class="modal-footer">
+                <p>Don't have an account? <a href="#" id="switchToSignup">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <span class="close-btn" id="signupCloseBtn">&times;</span>
+            <h2>Sign Up for CineView</h2>
+            <p>Start your entertainment journey today.</p>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="plan">Select Plan</label>
+                    <select id="plan" required>
+                        <option value="">Choose your plan</option>
+                        <option value="basic">Basic - $9.99/month</option>
+                        <option value="standard">Standard - $14.99/month</option>
+                        <option value="premium">Premium - $19.99/month</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+            <div class="modal-footer">
+                <p>Already have an account? <a href="#" id="switchToLogin">Log In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification">
+        <p>New releases added to your watchlist!</p>
+        <span class="notification-close"><i class="fas fa-times"></i></span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer glass-card">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>CineView</h2>
+                <p>Your ultimate streaming destination</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="tvshows.html">TV Shows</a></li>
+                        <li><a href="mylist.html">My List</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Device Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Content Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#" class="glow-effect"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="glow-effect"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="glow-effect"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="glow-effect"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 CineView. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Video Player Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <span class="close-video-btn" id="closeVideoBtn">&times;</span>
+            <div class="video-player-header">
+                <h3 id="videoTitle">Video Title</h3>
+                <div class="video-meta">
+                    <span id="videoYear">2023</span>
+                    <span id="videoRating"><i class="fas fa-star"></i> 8.5</span>
+                </div>
+            </div>
+            <div class="video-player-wrapper">
+                <div class="video-loading" id="videoLoading">
+                    <div class="video-spinner"></div>
+                </div>
+                <video id="videoPlayer" controls>
+                    <source src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video-info">
+                <div class="video-actions">
+                    <button class="video-action-btn primary"><i class="fas fa-plus"></i> Add to My List</button>
+                    <button class="video-action-btn"><i class="fas fa-thumbs-up"></i> Like</button>
+                    <button class="video-action-btn"><i class="fas fa-share"></i> Share</button>
+                    <button class="video-action-btn"><i class="fas fa-download"></i> Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sample Data for Offline Mode -->
+    <script src="src/data/sample-movies.js"></script>
+    
+    <!-- Local Data Service (Replaced TMDB API) -->
+    <script src="src/scripts/local-data-service.js"></script>
+    <script src="src/scripts/main.js"></script>
+    <script src="src/scripts/search.js"></script>
+    <script src="src/scripts/video-player.js"></script>
+    <script src="src/scripts/theme.js"></script>
+
+    <!-- JavaScript -->
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+        }
+        
+        // Notification show/hide
+        setTimeout(() => {
+            document.querySelector('.notification').classList.add('show');
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                document.querySelector('.notification').classList.remove('show');
+            }, 5000);
+        }, 3000);
+        
+        // Notification close button
+        document.querySelector('.notification-close').addEventListener('click', function() {
+            document.querySelector('.notification').classList.remove('show');
+        });
+        
+
+    </script>
+</body>
+</html> 
